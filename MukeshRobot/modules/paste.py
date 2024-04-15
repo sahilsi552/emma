@@ -3,9 +3,8 @@ import os
 import re
 
 import aiofiles
-from pykeyboard import InlineKeyboard
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton
+from pyrogram.types import InlineKeyboardButton,InlineKeyboardMarkup
 
 from MukeshRobot import aiohttpsession as session
 from MukeshRobot import pbot as app
@@ -49,9 +48,7 @@ async def paste_func(_, message):
             content = await f.read()
         os.remove(doc)
     link = await paste(content)
-    preview = link 
-    button = InlineKeyboard(row_width=1)
-    button.add(InlineKeyboardButton(text="• ᴘᴀsᴛᴇ ʟɪɴᴋ •", url=link))
+    button=InlineKeyboardMarkup([[InlineKeyboardButton(text="• ᴘᴀsᴛᴇ ʟɪɴᴋ •", url=link)]])
 
     await m.delete()
     try:
