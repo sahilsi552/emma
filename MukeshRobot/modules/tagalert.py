@@ -29,25 +29,30 @@ async def tagalert_command(client, message):
     await message.reply_text(f"Tagalert notifications {'enabled' if status == 'on' else 'disabled'} successfully!")
 
 
-@app.on_message(filters.group,group=10)
+@Mukesh.on_message(filters.group,group=10)
 async def handle_mentions(client, message):
         
     try:
-        user_id = message.reply_to_message.reply_to_message.from_user.id 
-        print("user id",user_id)
+        user_id = message.reply_to_message.from_user.id 
+        
         tagalert_status = tagalert_collection.find_one({"user_id": user_id})["status"]
-        print(tagalert_status)
+        
         tagalert_user=tagalert_collection.find_one({"user_id":user_id})["user_id"]
-        print("tag user ",tagalert_user)
+        
         if tagalert_status == 'on':
             group_title = message.chat.title
-            print(group_title)
+    
             sender_name = message.from_user.first_name
             tagged_message = message.text
-            print(tagged_message)
-            await client.send_message(tagalert_user, f"You were mentioned in group {group_title} by {sender_name}:\n{tagged_message}")
+            
+            if message.text:
+                await client.send_message(tagalert_user, f"You were mentioned in group {group_title} by {sender_name}:\n{tagged_message}")
+            else:
+                await client.send_message(tagalert_user, f"You were mentioned in group {group_title} by {sender_name} https://t.me/{message.chat.username}/{message.id}")
+
     except Exception as e:
         print(e)
+        
         
 __mod_name__= "Tᴀɢᴀʟᴇʀᴛ"
 
