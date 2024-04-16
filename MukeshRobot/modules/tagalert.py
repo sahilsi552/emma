@@ -33,15 +33,8 @@ async def tagalert_command(client, message):
 async def handle_mentions(client, message):
         
     try:
-<<<<<<< HEAD
         user_id = message.reply_to_message.reply_to_message.from_user.id 
         print("user id",user_id)
-=======
-        user_id = message.reply_to_message.reply_to_message.from_user.id
-    except Exception:
-        pass
-    try:
->>>>>>> 812809312a6548569aa7e487948abfa91f52a004
         tagalert_status = tagalert_collection.find_one({"user_id": user_id})["status"]
         print(tagalert_status)
         tagalert_user=tagalert_collection.find_one({"user_id":user_id})["user_id"]
