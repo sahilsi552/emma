@@ -292,7 +292,7 @@ def help_button(update, context):
             module = mod_match.group(1)
             text = (
                 "» *ᴀᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅs ꜰᴏʀ​​* *{}* :\n".format(
-                    HELPABLE[module].__mod_name__[:len(HELPABLE[module].__mod_name__)-1]
+                    HELPABLE[module].__mod_name__
                 )
                 + HELPABLE[module].__help__
             )
@@ -945,7 +945,7 @@ def get_help(update: Update, context: CallbackContext):
         module = args[1].lower()
         text = (
             "Here is the available help for the *{}* module:\n".format(
-                HELPABLE[module].__mod_name__[:len(HELPABLE[module].__mod_name__)-1]
+                HELPABLE[module].__mod_name__
             )
             + HELPABLE[module].__help__
         )
@@ -965,7 +965,7 @@ def send_settings(chat_id, user_id, user=False):
     if user:
         if USER_SETTINGS:
             settings = "\n\n".join(
-                "*{}*:\n{}".format(mod.__mod_name__[:len(mod.__mod_name__)-1], mod.__user_settings__(user_id))
+                "*{}*:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id))
                 for mod in USER_SETTINGS.values()
             )
             dispatcher.bot.send_message(
@@ -1016,7 +1016,7 @@ def settings_button(update: Update, context: CallbackContext):
             module = mod_match.group(2)
             chat = bot.get_chat(chat_id)
             text = "*{}* has the following settings for the *{}* module:\n\n".format(
-                escape_markdown(chat.title), CHAT_SETTINGS[module].__mod_name__[:len(CHAT_SETTINGS[module].__mod_name__)-1]
+                escape_markdown(chat.title), CHAT_SETTINGS[module].__mod_name__
             ) + CHAT_SETTINGS[module].__chat_settings__(chat_id, user.id)
             query.message.reply_text(text,
                 
