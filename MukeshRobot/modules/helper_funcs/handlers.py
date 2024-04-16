@@ -1,5 +1,4 @@
 from pyrate_limiter import (
-    BucketFullException,
     Duration,
     Limiter,
     MemoryListBucket,
@@ -49,7 +48,7 @@ class AntiSpam:
         try:
             self.limiter.try_acquire(user)
             return False
-        except BucketFullException:
+        except :
             return True
 
 

@@ -201,7 +201,7 @@ sᴇᴛᴛɪɴɢ ᴛʜᴇ ʟᴏɢ ᴄʜᴀɴɴᴇʟ ɪs ᴅᴏɴᴇ ʙʏ:
 ❍ ғᴏʀᴡᴀʀᴅɪɴɢ ᴛʜᴇ /setlog ᴛᴏ ᴛʜᴇ ɢʀᴏᴜᴘ
 """
 
-    __mod_name__ = "Lᴏɢs 📦​"
+    __mod_name__ = "Lᴏɢs​"
 
     LOG_HANDLER = CommandHandler("logchannel", logging, run_async=True)
     SET_LOG_HANDLER = CommandHandler("setlog", setlog, run_async=True)

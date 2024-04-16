@@ -305,7 +305,7 @@ async def lego(event):
         await event.reply(f"ᴇʀʀᴏʀ {e}, ʀᴇᴩᴏʀᴛ ᴛʜɪs ᴀᴛ @{SUPPORT_CHAT} ")
 
 
-__mod_name__ = "Lᴏɢᴏ ☘️"
+__mod_name__ = "Lᴏɢᴏ"
 
 __help__ = f"""
 @{BOT_USERNAME} ᴄᴀɴ ᴄʀᴇᴀᴛᴇ sᴏᴍᴇ ʙᴇᴀᴜᴛɪғᴜʟ ᴀɴᴅ ᴀᴛᴛʀᴀᴄᴛɪᴠᴇ ʟᴏɢᴏ ғᴏʀ ʏᴏᴜʀ ᴘʀᴏғɪʟᴇ ᴘɪᴄs.

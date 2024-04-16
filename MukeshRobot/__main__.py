@@ -26,7 +26,7 @@ from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 from telethon import __version__ as tlhver
 
-import MukeshRobot.modules.no_sql.users_db as sql
+import MukeshRobot.modules.sql.users_sql as sql
 from MukeshRobot import (
     BOT_NAME,
     BOT_USERNAME,
@@ -98,6 +98,9 @@ buttons = [
         InlineKeyboardButton(text="ᴍᴜsɪᴄ 🎧",callback_data="Music_"),
     ],
     [
+        InlineKeyboardButton(
+                            text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat="google"
+                        ),
         InlineKeyboardButton(
                             text="Hᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ ⁉️",
                             callback_data="bot_config_help",
@@ -785,7 +788,7 @@ def Music_about_callback(update: Update, context: CallbackContext):
                         ),
                     ],
                     [
-                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="Main_help")
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="mukesh_back")
                     ],
                 ]
             ),
