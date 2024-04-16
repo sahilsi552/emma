@@ -116,6 +116,6 @@ SPURGE_HANDLER = spurge_messages, events.NewMessage(pattern="^[!/]spurge$")
 telethn.add_event_handler(*PURGE_HANDLER)
 telethn.add_event_handler(*DEL_HANDLER)
 telethn.add_event_handler(*SPURGE_HANDLER)
-__mod_name__ = "Pᴜʀɢᴇ"
+__mod_name__ = "Pᴜʀɢᴇ 🪧"
 __command_list__ = ["del", "purge","spurge"]
 __handlers__ = [PURGE_HANDLER, DEL_HANDLER,SPURGE_HANDLER]

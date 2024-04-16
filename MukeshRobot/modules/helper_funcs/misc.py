@@ -46,16 +46,13 @@ def split_message(msg: str) -> List[str]:
 
     return result
 
-
 def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
     if not chat:
         modules = sorted(
             [
                 EqInlineKeyboardButton(
                     x.__mod_name__,
-                    callback_data="{}_module({})".format(
-                        prefix, x.__mod_name__.lower()
-                    ),
+                    callback_data=f'{prefix}_module({x.__mod_name__.replace(" ", "_").lower()})',
                 )
                 for x in module_dict.values()
             ]
@@ -65,44 +62,114 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
             [
                 EqInlineKeyboardButton(
                     x.__mod_name__,
-                    callback_data="{}_module({},{})".format(
-                        prefix, chat, x.__mod_name__.lower()
-                    ),
+                    callback_data=f'{prefix}_module({chat},{x.__mod_name__.replace(" ", "_").lower()[:len(x.__mod_name__.replace(" ", "_").lower()-1)]})',
                 )
                 for x in module_dict.values()
             ]
         )
 
-    pairs = [modules[i * 2 : (i + 1) * 2] for i in range((len(modules) + 2 - 1) // 2)]
-
-    round_num = len(modules) / 2
-    calc = len(modules) - round(round_num)
-    if calc in [1, 2]:
+    pairs = list(zip(modules[::3], modules[1::3]))
+    i = 0
+    for m in pairs:
+        for _ in m:
+            i += 1
+    if len(modules) - i == 1:
         pairs.append((modules[-1],))
+    elif len(modules) - i == 2:
+        pairs.append(
+            (
+                modules[-2],
+                modules[-1],
+            )
+        )
 
-    max_num_pages = ceil(len(pairs) / 4)
+    COLUMN_SIZE = 6
+
+    max_num_pages = ceil(len(pairs) / COLUMN_SIZE)
     modulo_page = page_n % max_num_pages
 
     # can only have a certain amount of buttons side by side
-    if len(pairs) > 3:
-        pairs = pairs[modulo_page * 6: 6* (modulo_page + 1)] + [
+    if len(pairs) > COLUMN_SIZE:
+        pairs = pairs[
+            modulo_page * COLUMN_SIZE : COLUMN_SIZE * (modulo_page + 1)
+        ] + [
             (
                 EqInlineKeyboardButton(
-                    "⏮️ Pʀᴇᴠɪᴏᴜs", callback_data="{}_prev({})".format(prefix, modulo_page)
+                    "⬅️ ʙᴀᴄᴋ", callback_data=f"{prefix}_prev({modulo_page})"
                 ),
+                
                 EqInlineKeyboardButton(
-                    " Rᴇᴛᴜʀɴ ʜᴏᴍᴇ 🏡", callback_data="mukesh_back"
+                    "Nᴇxᴛ ➡️", callback_data=f"{prefix}_next({modulo_page})"
                 ),
+            )
+        ]+[
+            (
                 EqInlineKeyboardButton(
-                    "Nᴇxᴛ ⏭️", callback_data="{}_next({})".format(prefix, modulo_page)
+                    "Rᴇᴛᴜʀɴ ʜᴏᴍᴇ 🏡",
+                    callback_data="mukesh_back",
                 ),
             )
         ]
 
-    else:
-        pairs += [[EqInlineKeyboardButton("🔙 ʙᴀᴄᴋ", callback_data="mukesh_back")]]
-
     return pairs
+
+# def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
+    # if not chat:
+    #     modules = sorted(
+    #         [
+    #             EqInlineKeyboardButton(
+    #                 x.__mod_name__,
+    #                 callback_data="{}_module({})".format(
+    #                     prefix, x.__mod_name__.lower()
+    #                 ),
+    #             )
+    #             for x in module_dict.values()
+    #         ]
+    #     )
+    # else:
+    #     modules = sorted(
+    #         [
+    #             EqInlineKeyboardButton(
+    #                 x.__mod_name__,
+    #                 callback_data="{}_module({},{})".format(
+    #                     prefix, chat, x.__mod_name__.lower()
+    #                 ),
+    #             )
+    #             for x in module_dict.values()
+    #         ]
+    #     )
+
+    # pairs = [modules[i * 2 : (i + 1) * 2] for i in range((len(modules) +2 ) // 2)]
+
+    # round_num = len(modules) / 3
+    # calc = len(modules) - round(round_num)
+    # if calc in [1, 2]:
+    #     pairs.append((modules[-1],))
+
+    # max_num_pages = ceil(len(pairs) / 4)
+    # modulo_page = page_n % max_num_pages
+
+    # can only have a certain amount of buttons side by side
+    # if len(pairs) > 2:
+    #     pairs = pairs[modulo_page * 6: 6* (modulo_page + 1)] + [
+    #         (
+    #             EqInlineKeyboardButton(
+    #                 "⏮️ Pʀᴇᴠɪᴏᴜs", callback_data="{}_prev({})".format(prefix, modulo_page)
+    #             ),
+    #             EqInlineKeyboardButton(
+    #                 " Rᴇᴛᴜʀɴ ʜᴏᴍᴇ 🏡", callback_data="mukesh_back"
+    #             ),
+
+    #             EqInlineKeyboardButton(
+    #                 "Nᴇxᴛ ⏭️", callback_data="{}_next({})".format(prefix, modulo_page)
+    #             ),
+    #         )
+    #     ]
+
+    # else:
+    #     pairs += [[EqInlineKeyboardButton("🔙 ʙᴀᴄᴋ", callback_data="mukesh_back")]]
+
+    # return pairs
 
 
 def article(

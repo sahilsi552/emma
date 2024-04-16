@@ -97,7 +97,7 @@ MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, run_async=True)
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(MD_HELP_HANDLER)
 
-__mod_name__ = "Exᴛʀᴀs"
+__mod_name__ = "Exᴛʀᴀs 🥀"
 __command_list__ = ["id", "echo"]
 __handlers__ = [
     ECHO_HANDLER,

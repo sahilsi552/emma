@@ -145,7 +145,7 @@ async def unmute_fsub(event):
     await event.delete()
 
 
-__mod_name__ = "F-sᴜʙ"
+__mod_name__ = "F-sᴜʙ 🪠"
 
 __help__="""
 *ғᴏʀᴄᴇ ꜱᴜʙꜱᴄʀɪʙᴇ:*

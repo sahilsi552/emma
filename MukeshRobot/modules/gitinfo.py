@@ -50,7 +50,7 @@ async def github(_, message):
     await message.reply_photo(photo=avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(Mukesh))
 
 
-__mod_name__ = "Gɪᴛʜᴜʙ"
+__mod_name__ = "Gɪᴛʜᴜʙ 🕸️"
 
 __help__ = """
 ᴘʀᴏᴠɪᴅᴇs ʏᴏᴜ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴀ ɢɪᴛʜᴜʙ ᴘʀᴏғɪʟᴇ. 
