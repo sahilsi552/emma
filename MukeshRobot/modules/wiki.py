@@ -9,9 +9,7 @@ from MukeshRobot.modules.disable import DisableAbleCommandHandler
 
 def wiki(update: Update, context: CallbackContext):
     msg = (
-        update.effective_message.reply_to_message
-        if update.effective_message.reply_to_message
-        else update.effective_message
+        update.effective_message.reply_to_message or update.effective_message
     )
     res = ""
     if msg == update.effective_message:
@@ -22,15 +20,11 @@ def wiki(update: Update, context: CallbackContext):
         res = wikipedia.summary(search)
     except DisambiguationError as e:
         update.message.reply_text(
-            "Disambiguated pages found! Adjust your query accordingly.\n<i>{}</i>".format(
-                e
-            ),
+            f"Disambiguated pages found! Adjust your query accordingly.\n<i>{e}</i>",
             parse_mode=ParseMode.HTML,
         )
     except PageError as e:
-        update.message.reply_text(
-            "<code>{}</code>".format(e), parse_mode=ParseMode.HTML
-        )
+        update.message.reply_text(f"<code>{e}</code>", parse_mode=ParseMode.HTML)
     if res:
         result = f"<b>{search}</b>\n\n"
         result += f"<i>{res}</i>\n"

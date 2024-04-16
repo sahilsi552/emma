@@ -58,7 +58,7 @@ async def inline_menu(c: Mukesh, inline_query: InlineQuery):
                 snippet = result.find(
                     "div", class_="VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc lEBKkf"
                 ).get_text()
-            except:
+            except Exception:
                 snippet = "-"
             message_text = f"ᴛɪᴛʟᴇ:  {title}\n ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ : {snippet}"
             data.append(

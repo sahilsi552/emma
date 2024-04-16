@@ -64,7 +64,7 @@ async def broadcast_handler(bot: Client, m: Message):
         f"{m.from_user.mention} or {m.from_user.id} Iꜱ ꜱᴛᴀʀᴛᴇᴅ ᴛʜᴇ Bʀᴏᴀᴅᴄᴀꜱᴛ......",
     )
     broadcast_msg = m.reply_to_message
-    sts_msg = await m.reply_text(f"broadcasting ..")
+    sts_msg = await m.reply_text("broadcasting ..")
     done = 0
     failed = 0
     success = 0
@@ -78,8 +78,6 @@ async def broadcast_handler(bot: Client, m: Message):
             success += 1
         else:
             failed += 1
-        if sts == 400:
-            pass
         done += 1
         if not done % 20:
             await sts_msg.edit(
@@ -109,10 +107,8 @@ async def send_chat(chat_id, message):
         return 400
     except Exception as e:
         logger.error(f"{chat_id} : {e}")
-        pass
 
 @dev_plus
-# broadcast
 @Mukesh.on_message(filters.command(["buser","broadcastusers"]) & filters.user(OWNER_ID) & filters.reply)
 async def broadcast_handler(bot: Client, m: Message):
     all_users = get_all_users()
@@ -121,7 +117,7 @@ async def broadcast_handler(bot: Client, m: Message):
         f"{m.from_user.mention} or {m.from_user.id} Iꜱ ꜱᴛᴀʀᴛᴇᴅ ᴛʜᴇ Bʀᴏᴀᴅᴄᴀꜱᴛ......",
     )
     broadcast_msg = m.reply_to_message
-    sts_msg = await m.reply_text(f"broadcasting ..")
+    sts_msg = await m.reply_text("broadcasting ..")
     done = 0
     failed = 0
     success = 0
@@ -133,8 +129,6 @@ async def broadcast_handler(bot: Client, m: Message):
             success += 1
         else:
             failed += 1
-        if sts == 400:
-            pass
         done += 1
         if not done % 20:
             await sts_msg.edit(
@@ -200,7 +194,7 @@ def chats(update: Update, context: CallbackContext):
             chat_members = curr_chat.get_member_count(context.bot.id)
             chatfile += f"{P} {chat.chat_name} | {chat_id} | {chat_members}"
             P = P + 1
-        except:
+        except Exception:
             pass
 
     with BytesIO(str.encode(chatfile)) as output:

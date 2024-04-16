@@ -54,10 +54,10 @@ async def distance(bot, message):
         return await message.reply_text(
             "**Example:**\n\n`/distance [latitude , longitude],[latitude , longitude]`")
 
-    x = message.text.split(" ")[1].split(',',2)[0:2]
+    x = message.text.split(" ")[1].split(',',2)[:2]
     y = message.text.split(" ")[1].split(',',4)[2:4]
 
-    
+
 
 
     try:
@@ -69,7 +69,7 @@ async def distance(bot, message):
         distance=(great_circle(x,y).miles)
 
         await message.reply_text(f"Total distance between {x[0]},{x[1]} and {y[0]},{y[1]} is {distance}")
-        
+
     except Exception as e:
         await message.reply_text(f"I can't find that \nDue to {e}")
         

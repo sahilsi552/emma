@@ -41,7 +41,7 @@ async def get_vars(_, message: Message):
 
 
 """)
-    except:
+    except Exception:
         return await message.reply_text("» ғᴀɪʟᴇᴅ ᴛᴏ sᴇɴᴅ ᴛʜᴇ ᴄᴏɴғɪɢ ᴠᴀʀɪᴀʙʟᴇs.")
     if message.chat.type != ChatType.PRIVATE:
         await message.reply_text(

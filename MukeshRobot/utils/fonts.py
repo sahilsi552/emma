@@ -1,5 +1,5 @@
 class Fonts:
-    def typewriter(text):
+    def typewriter(self):
         style = {
             "a": "𝚊",
             "b": "𝚋",
@@ -55,10 +55,10 @@ class Fonts:
             "Z": "𝚉",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def outline(text):
+    def outline(self):
         style = {
             "a": "𝕒",
             "b": "𝕓",
@@ -124,10 +124,10 @@ class Fonts:
             "9": "𝟡",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def serief(text):
+    def serief(self):
         style = {
             "a": "𝐚",
             "b": "𝐛",
@@ -193,10 +193,10 @@ class Fonts:
             "9": "𝟗",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def bold_cool(text):
+    def bold_cool(self):
         style = {
             "a": "𝒂",
             "b": "𝒃",
@@ -252,10 +252,10 @@ class Fonts:
             "Z": "𝒁",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def cool(text):
+    def cool(self):
         style = {
             "a": "𝑎",
             "b": "𝑏",
@@ -311,10 +311,10 @@ class Fonts:
             "Z": "𝑍",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def smallcap(text):
+    def smallcap(self):
         style = {
             "a": "ᴀ",
             "b": "ʙ",
@@ -380,10 +380,10 @@ class Fonts:
             "9": "𝟿",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def script(text):
+    def script(self):
         style = {
             "a": "𝒶",
             "b": "𝒷",
@@ -439,10 +439,10 @@ class Fonts:
             "Z": "𝒵",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def bold_script(text):
+    def bold_script(self):
         style = {
             "a": "𝓪",
             "b": "𝓫",
@@ -498,10 +498,10 @@ class Fonts:
             "Z": "𝓩",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def tiny(text):
+    def tiny(self):
         style = {
             "a": "ᵃ",
             "b": "ᵇ",
@@ -557,10 +557,10 @@ class Fonts:
             "Z": "ᶻ",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def comic(text):
+    def comic(self):
         style = {
             "a": "ᗩ",
             "b": "ᗷ",
@@ -616,10 +616,10 @@ class Fonts:
             "Z": "ᘔ",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def san(text):
+    def san(self):
         style = {
             "a": "𝗮",
             "b": "𝗯",
@@ -685,10 +685,10 @@ class Fonts:
             "9": "𝟵",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def slant_san(text):
+    def slant_san(self):
         style = {
             "a": "𝙖",
             "b": "𝙗",
@@ -744,10 +744,10 @@ class Fonts:
             "Z": "𝙕",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def slant(text):
+    def slant(self):
         style = {
             "a": "𝘢",
             "b": "𝘣",
@@ -803,10 +803,10 @@ class Fonts:
             "Z": "𝘡",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def sim(text):
+    def sim(self):
         style = {
             "a": "𝖺",
             "b": "𝖻",
@@ -862,10 +862,10 @@ class Fonts:
             "Z": "𝖹",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def circles(text):
+    def circles(self):
         style = {
             "a": "Ⓐ︎",
             "b": "Ⓑ︎",
@@ -931,10 +931,10 @@ class Fonts:
             "9": "⑨",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def dark_circle(text):
+    def dark_circle(self):
         style = {
             "a": "🅐︎",
             "b": "🅑︎",
@@ -1000,10 +1000,10 @@ class Fonts:
             "9": "➒",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def gothic(text):
+    def gothic(self):
         style = {
             "a": "𝔞",
             "b": "𝔟",
@@ -1059,10 +1059,10 @@ class Fonts:
             "Z": "ℨ",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def bold_gothic(text):
+    def bold_gothic(self):
         style = {
             "a": "𝖆",
             "b": "𝖇",
@@ -1118,10 +1118,10 @@ class Fonts:
             "Z": "𝖅",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def cloud(text):
+    def cloud(self):
         style = {
             "a": "a͜͡",
             "b": "b͜͡",
@@ -1177,10 +1177,10 @@ class Fonts:
             "Z": "Z͜͡",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def happy(text):
+    def happy(self):
         style = {
             "a": "ă̈",
             "b": "b̆̈",
@@ -1236,10 +1236,10 @@ class Fonts:
             "Z": "Z̆̈",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def sad(text):
+    def sad(self):
         style = {
             "a": "ȃ̈",
             "b": "b̑̈",
@@ -1295,10 +1295,10 @@ class Fonts:
             "Z": "Z̑̈",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def special(text):
+    def special(self):
         style = {
             "a": "🇦 ",
             "b": "🇧 ",
@@ -1354,10 +1354,10 @@ class Fonts:
             "Z": "🇿 ",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def square(text):
+    def square(self):
         style = {
             "a": "🄰",
             "b": "🄱",
@@ -1413,10 +1413,10 @@ class Fonts:
             "Z": "🅉",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def dark_square(text):
+    def dark_square(self):
         style = {
             "a": "🅰︎",
             "b": "🅱︎",
@@ -1472,10 +1472,10 @@ class Fonts:
             "Z": "🆉︎",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def andalucia(text):
+    def andalucia(self):
         style = {
             "a": "ꪖ",
             "b": "᥇",
@@ -1531,10 +1531,10 @@ class Fonts:
             "Z": "ɀ",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def manga(text):
+    def manga(self):
         style = {
             "a": "卂",
             "b": "乃",
@@ -1590,10 +1590,10 @@ class Fonts:
             "Z": "乙",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def stinky(text):
+    def stinky(self):
         style = {
             "a": "a̾",
             "b": "b̾",
@@ -1649,10 +1649,10 @@ class Fonts:
             "Z": "Z̾",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def bubbles(text):
+    def bubbles(self):
         style = {
             "a": "ḁͦ",
             "b": "b̥ͦ",
@@ -1708,10 +1708,10 @@ class Fonts:
             "Z": "Z̥ͦ",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def underline(text):
+    def underline(self):
         style = {
             "a": "a͟",
             "b": "b͟",
@@ -1767,10 +1767,10 @@ class Fonts:
             "Z": "Z͟",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def ladybug(text):
+    def ladybug(self):
         style = {
             "a": "ꍏ",
             "b": "ꌃ",
@@ -1826,10 +1826,10 @@ class Fonts:
             "Z": "ꁴ",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def rays(text):
+    def rays(self):
         style = {
             "a": "a҉",
             "b": "b҉",
@@ -1885,10 +1885,10 @@ class Fonts:
             "Z": "Z҉",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def birds(text):
+    def birds(self):
         style = {
             "a": "a҈",
             "b": "b҈",
@@ -1944,10 +1944,10 @@ class Fonts:
             "Z": "Z҈",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def slash(text):
+    def slash(self):
         style = {
             "a": "a̸",
             "b": "b̸",
@@ -2003,10 +2003,10 @@ class Fonts:
             "Z": "Z̸",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def stop(text):
+    def stop(self):
         style = {
             "a": "a⃠",
             "b": "b⃠",
@@ -2062,10 +2062,10 @@ class Fonts:
             "Z": "Z⃠",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def skyline(text):
+    def skyline(self):
         style = {
             "a": "a̺͆",
             "b": "b̺͆",
@@ -2121,10 +2121,10 @@ class Fonts:
             "Z": "Z̺͆",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def arrows(text):
+    def arrows(self):
         style = {
             "a": "a͎",
             "b": "b͎",
@@ -2180,10 +2180,10 @@ class Fonts:
             "Z": "Z͎",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def rvnes(text):
+    def rvnes(self):
         style = {
             "a": "ል",
             "b": "ጌ",
@@ -2239,10 +2239,10 @@ class Fonts:
             "Z": "ጊ",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def strike(text):
+    def strike(self):
         style = {
             "a": "a̶",
             "b": "b̶",
@@ -2298,10 +2298,10 @@ class Fonts:
             "Z": "Z̶",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self
 
-    def frozen(text):
+    def frozen(self):
         style = {
             "a": "a༙",
             "b": "b༙",
@@ -2357,5 +2357,5 @@ class Fonts:
             "Z": "Z༙",
         }
         for i, j in style.items():
-            text = text.replace(i, j)
-        return text
+            self = self.replace(i, j)
+        return self

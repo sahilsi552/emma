@@ -49,7 +49,11 @@ def LastOnline(user: User):
 
 
 def FullName(user: User):
-    return user.first_name + " " + user.last_name if user.last_name else user.first_name
+    return (
+        f"{user.first_name} {user.last_name}"
+        if user.last_name
+        else user.first_name
+    )
 
 
 @pbot.on_message(filters.command("whois"))
@@ -78,10 +82,10 @@ async def whois(client, message):
             user_id=user.id,
             user_dc=user.dc_id,
             first_name=user.first_name,
-            last_name=user.last_name if user.last_name else "",
-            username=user.username if user.username else "",
+            last_name=user.last_name or "",
+            username=user.username or "",
             last_online=LastOnline(user),
-            bio=desc if desc else "`ᴇᴍᴩᴛʏ.`",
+            bio=desc or "`ᴇᴍᴩᴛʏ.`",
         ),
         disable_web_page_preview=True,
     )

@@ -9,10 +9,10 @@ def _netcat(host, port, content):
     s.sendall(content.encode())
     s.shutdown(socket.SHUT_WR)
     while True:
-        data = s.recv(4096).decode("utf-8").strip("\n\x00")
-        if not data:
+        if data := s.recv(4096).decode("utf-8").strip("\n\x00"):
+            return data
+        else:
             break
-        return data
     s.close()
 
 
@@ -20,5 +20,4 @@ async def paste(content):
     url ="https://pastebin.com/api/api_post.php"
     data = {"api_dev_key":"9Rfu50iV5l3EuRWATw7EDLuC37RED-C4","api_paste_code": content,"api_option": "paste"}
     response = requests.post(url, data=data)
-    link=response.text
-    return link
+    return response.text

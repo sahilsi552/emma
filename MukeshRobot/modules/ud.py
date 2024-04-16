@@ -14,7 +14,7 @@ def ud(update: Update, context: CallbackContext):
     ).json()
     try:
         reply_text = f'*{text}*\n\n{results["list"][0]["definition"]}\n\n_{results["list"][0]["example"]}_'
-    except:
+    except Exception:
         reply_text = "No results found."
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
 

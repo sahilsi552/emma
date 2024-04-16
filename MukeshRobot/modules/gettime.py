@@ -23,11 +23,7 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
                 country_zone = zone["zoneName"]
                 country_code = zone["countryCode"]
 
-                if zone["dst"] == 1:
-                    daylight_saving = "Yes"
-                else:
-                    daylight_saving = "No"
-
+                daylight_saving = "Yes" if zone["dst"] == 1 else "No"
                 date_fmt = r"%d-%m-%Y"
                 time_fmt = r"%H:%M:%S"
                 day_fmt = r"%A"
@@ -52,7 +48,7 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
             f"<b>Current Date:</b> <code>{current_date}</code>\n"
             '<b>Timezones:</b> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List here</a>'
         )
-    except:
+    except Exception:
         result = None
 
     return result
@@ -63,7 +59,7 @@ def gettime(update: Update, context: CallbackContext):
 
     try:
         query = message.text.strip().split(" ", 1)[1]
-    except:
+    except Exception:
         message.reply_text("Provide a country name/abbreviation/timezone to find.")
         return
     send_message = message.reply_text(

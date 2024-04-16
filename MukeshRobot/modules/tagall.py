@@ -41,7 +41,7 @@ async def mentionall(event):
     elif event.is_reply:
         mode = "text_on_reply"
         msg = await event.get_reply_message()
-        if msg == None:
+        if msg is None:
             return await event.respond(
                 "__ɪ ᴄᴀɴ'ᴛ ᴍᴇɴᴛɪᴏɴ ᴍᴇᴍʙᴇʀs ғᴏʀ ᴏʟᴅᴇʀ ᴍᴇssᴀɢᴇs! (ᴍᴇssᴀɢᴇs ᴡʜɪᴄʜ ᴀʀᴇ sᴇɴᴛ ʙᴇғᴏʀᴇ ɪ'ᴍ ᴀᴅᴅᴇᴅ ᴛᴏ ɢʀᴏᴜᴘ__"
             )
@@ -54,7 +54,7 @@ async def mentionall(event):
     usrnum = 0
     usrtxt = ""
     async for usr in client.iter_participants(chat_id):
-        if not chat_id in spam_chats:
+        if chat_id not in spam_chats:
             break
         usrnum += 1
         usrtxt += f"[{usr.first_name}](tg://user?id={usr.id}), "
@@ -69,13 +69,13 @@ async def mentionall(event):
             usrtxt = ""
     try:
         spam_chats.remove(chat_id)
-    except:
+    except Exception:
         pass
 
 
 @client.on(events.NewMessage(pattern="^/cancel$"))
 async def cancel_spam(event):
-    if not event.chat_id in spam_chats:
+    if event.chat_id not in spam_chats:
         return await event.respond("ᴛʜᴇʀᴇ ɪs ɴᴏ ᴘʀᴏᴄᴄᴇss ᴏɴ ɢᴏɪɴɢ..")
     is_admin = False
     try:
@@ -90,12 +90,11 @@ async def cancel_spam(event):
     if not is_admin:
         return await event.respond("__ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ ᴇxᴇᴄᴜᴛᴇ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ!__")
 
-    else:
-        try:
-            spam_chats.remove(event.chat_id)
-        except:
-            pass
-        return await event.respond("sᴛᴏᴘᴘᴇᴅ ᴍᴇɴᴛɪᴏɴ.__")
+    try:
+        spam_chats.remove(event.chat_id)
+    except Exception:
+        pass
+    return await event.respond("sᴛᴏᴘᴘᴇᴅ ᴍᴇɴᴛɪᴏɴ.__")
 
 
 __mod_name__ = "Tᴀɢᴀʟʟ 🤧"

@@ -33,7 +33,7 @@ async def tagalert_command(client, message):
 async def handle_mentions(client, message):
     try:
         user_id = message.reply_to_message.reply_to_message.from_user.id
-    except:
+    except Exception:
         pass
     try:
         tagalert_status = tagalert_collection.find_one({"user_id": user_id})["status"]
