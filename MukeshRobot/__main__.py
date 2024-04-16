@@ -95,6 +95,9 @@ buttons = [
         InlineKeyboardButton(
                             text="👨‍💻ᴅᴇᴠᴇʟᴏᴩᴇʀ", url=f"tg://user?id={OWNER_ID}"
                         ),
+        InlineKeyboardButton(text="ᴍᴜsɪᴄ 🎧",callback_data="Music_"),
+    ],
+    [
         InlineKeyboardButton(
                             text="Hᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ ⁉️",
                             callback_data="bot_config_help",
