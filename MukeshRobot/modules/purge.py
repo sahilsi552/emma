@@ -28,11 +28,10 @@ async def purge_messages(event):
     if not reply_msg:
         await event.reply("Reply to a message to select where to start purging from.")
         return
-    messages = []
     message_id = reply_msg.id
     delete_to = event.message.id
 
-    messages.append(event.reply_to_msg_id)
+    messages = [event.reply_to_msg_id]
     for msg_id in range(message_id, delete_to + 1):
         messages.append(msg_id)
         if len(messages) == 100:
@@ -41,7 +40,7 @@ async def purge_messages(event):
 
     try:
         await event.client.delete_messages(event.chat_id, messages)
-    except:
+    except Exception:
         pass
     time_ = time.perf_counter() - start
     text = f"ᴘᴜʀɢᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ɪɴ {time_:0.2f} ꜱᴇᴄᴏɴᴅ(s)\nꜰᴀꜱᴛ ᴀꜰ 😎"
@@ -86,11 +85,10 @@ async def spurge_messages(event):
     if not reply_msg:
         await event.reply("Reply to a message to select where to start purging from.")
         return
-    messages = []
     message_id = reply_msg.id
     delete_to = event.message.id
 
-    messages.append(event.reply_to_msg_id)
+    messages = [event.reply_to_msg_id]
     for msg_id in range(message_id, delete_to + 1):
         messages.append(msg_id)
         if len(messages) == 100:
@@ -99,7 +97,7 @@ async def spurge_messages(event):
 
     try:
         await event.client.delete_messages(event.chat_id, messages)
-    except:
+    except Exception:
         pass
 
 __help__ = """

@@ -80,10 +80,8 @@ def send(update, message, keyboard, backup_message):
     reply = update.message.message_id
     # Clean service welcome
     if cleanserv:
-        try:
+        with suppress(BadRequest):
             dispatcher.bot.delete_message(chat.id, update.message.message_id)
-        except BadRequest:
-            pass
         reply = False
     try:
         msg = update.effective_message.reply_text(
@@ -93,14 +91,7 @@ def send(update, message, keyboard, backup_message):
             reply_to_message_id=reply,
         )
     except BadRequest as excp:
-        if excp.message == "Reply message not found":
-            msg = update.effective_message.reply_text(
-                message,
-                parse_mode=ParseMode.MARKDOWN,
-                reply_markup=keyboard,
-                quote=False,
-            )
-        elif excp.message == "Button_url_invalid":
+        if excp.message == "Button_url_invalid":
             msg = update.effective_message.reply_text(
                 markdown_parser(
                     backup_message + "\nNote: the current message has an invalid url "
@@ -108,6 +99,15 @@ def send(update, message, keyboard, backup_message):
                 ),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_to_message_id=reply,
+            )
+        elif excp.message == "Have no rights to send a message":
+            return
+        elif excp.message == "Reply message not found":
+            msg = update.effective_message.reply_text(
+                message,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=keyboard,
+                quote=False,
             )
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(
@@ -131,8 +131,6 @@ def send(update, message, keyboard, backup_message):
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
             LOGGER.exception("Could not parse! got invalid url host errors")
-        elif excp.message == "Have no rights to send a message":
-            return
         else:
             msg = update.effective_message.reply_text(
                 markdown_parser(
@@ -171,9 +169,7 @@ def new_member(update: Update, context: CallbackContext):
         if should_welc:
 
             reply = update.message.message_id
-            cleanserv = sql.clean_service(chat.id)
-            # Clean service welcome
-            if cleanserv:
+            if cleanserv := sql.clean_service(chat.id):
                 try:
                     dispatcher.bot.delete_message(chat.id, update.message.message_id)
                 except BadRequest:
@@ -347,90 +343,89 @@ def new_member(update: Update, context: CallbackContext):
         if new_mem.is_bot:
             should_mute = False
 
-        if user.id == new_mem.id:
-            if should_mute:
-                if welc_mutes == "soft":
-                    bot.restrict_chat_member(
-                        chat.id,
-                        new_mem.id,
-                        permissions=ChatPermissions(
-                            can_send_messages=True,
-                            can_send_media_messages=False,
-                            can_send_other_messages=False,
-                            can_invite_users=False,
-                            can_pin_messages=False,
-                            can_send_polls=False,
-                            can_change_info=False,
-                            can_add_web_page_previews=False,
-                        ),
-                        until_date=(int(time.time() + 24 * 60 * 60)),
-                    )
-                if welc_mutes == "strong":
-                    welcome_bool = False
-                    if not media_wel:
-                        VERIFIED_USER_WAITLIST.update(
-                            {
-                                new_mem.id: {
-                                    "should_welc": should_welc,
-                                    "media_wel": False,
-                                    "status": False,
-                                    "update": update,
-                                    "res": res,
-                                    "keyboard": keyboard,
-                                    "backup_message": backup_message,
-                                }
+        if should_mute and user.id == new_mem.id:
+            if welc_mutes == "soft":
+                bot.restrict_chat_member(
+                    chat.id,
+                    new_mem.id,
+                    permissions=ChatPermissions(
+                        can_send_messages=True,
+                        can_send_media_messages=False,
+                        can_send_other_messages=False,
+                        can_invite_users=False,
+                        can_pin_messages=False,
+                        can_send_polls=False,
+                        can_change_info=False,
+                        can_add_web_page_previews=False,
+                    ),
+                    until_date=(int(time.time() + 24 * 60 * 60)),
+                )
+            if welc_mutes == "strong":
+                welcome_bool = False
+                if not media_wel:
+                    VERIFIED_USER_WAITLIST.update(
+                        {
+                            new_mem.id: {
+                                "should_welc": should_welc,
+                                "media_wel": False,
+                                "status": False,
+                                "update": update,
+                                "res": res,
+                                "keyboard": keyboard,
+                                "backup_message": backup_message,
                             }
-                        )
-                    else:
-                        VERIFIED_USER_WAITLIST.update(
-                            {
-                                new_mem.id: {
-                                    "should_welc": should_welc,
-                                    "chat_id": chat.id,
-                                    "status": False,
-                                    "media_wel": True,
-                                    "cust_content": cust_content,
-                                    "welc_type": welc_type,
-                                    "res": res,
-                                    "keyboard": keyboard,
-                                }
+                        }
+                    )
+                else:
+                    VERIFIED_USER_WAITLIST.update(
+                        {
+                            new_mem.id: {
+                                "should_welc": should_welc,
+                                "chat_id": chat.id,
+                                "status": False,
+                                "media_wel": True,
+                                "cust_content": cust_content,
+                                "welc_type": welc_type,
+                                "res": res,
+                                "keyboard": keyboard,
                             }
-                        )
-                    new_join_mem = f'<a href="tg://user?id={user.id}">{html.escape(new_mem.first_name)}</a>'
-                    message = msg.reply_text(
-                        f"{new_join_mem}, ᴄʟɪᴄᴋ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ᴘʀᴏᴠᴇ ʏᴏᴜ'ʀᴇ ʜᴜᴍᴀɴ.\n Yᴏᴜ ʜᴀᴠᴇ 𝟷𝟸𝟶 sᴇᴄᴏɴᴅs.",
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                                {
-                                    InlineKeyboardButton(
-                                        text="ʏᴇs ɪ'ᴍ ʜᴜᴍᴀɴ ",
-                                        callback_data=f"user_join_({new_mem.id})",
-                                    )
-                                }
-                            ]
-                        ),
-                        parse_mode=ParseMode.HTML,
-                        reply_to_message_id=reply,
+                        }
                     )
-                    bot.restrict_chat_member(
-                        chat.id,
-                        new_mem.id,
-                        permissions=ChatPermissions(
-                            can_send_messages=False,
-                            can_invite_users=False,
-                            can_pin_messages=False,
-                            can_send_polls=False,
-                            can_change_info=False,
-                            can_send_media_messages=False,
-                            can_send_other_messages=False,
-                            can_add_web_page_previews=False,
-                        ),
-                    )
-                    job_queue.run_once(
-                        partial(check_not_bot, new_mem, chat.id, message.message_id),
-                        120,
-                        name="welcomemute",
-                    )
+                new_join_mem = f'<a href="tg://user?id={user.id}">{html.escape(new_mem.first_name)}</a>'
+                message = msg.reply_text(
+                    f"{new_join_mem}, ᴄʟɪᴄᴋ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ᴘʀᴏᴠᴇ ʏᴏᴜ'ʀᴇ ʜᴜᴍᴀɴ.\n Yᴏᴜ ʜᴀᴠᴇ 𝟷𝟸𝟶 sᴇᴄᴏɴᴅs.",
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            {
+                                InlineKeyboardButton(
+                                    text="ʏᴇs ɪ'ᴍ ʜᴜᴍᴀɴ ",
+                                    callback_data=f"user_join_({new_mem.id})",
+                                )
+                            }
+                        ]
+                    ),
+                    parse_mode=ParseMode.HTML,
+                    reply_to_message_id=reply,
+                )
+                bot.restrict_chat_member(
+                    chat.id,
+                    new_mem.id,
+                    permissions=ChatPermissions(
+                        can_send_messages=False,
+                        can_invite_users=False,
+                        can_pin_messages=False,
+                        can_send_polls=False,
+                        can_change_info=False,
+                        can_send_media_messages=False,
+                        can_send_other_messages=False,
+                        can_add_web_page_previews=False,
+                    ),
+                )
+                job_queue.run_once(
+                    partial(check_not_bot, new_mem, chat.id, message.message_id),
+                    120,
+                    name="welcomemute",
+                )
 
         if welcome_bool:
             if media_wel:
@@ -444,8 +439,7 @@ def new_member(update: Update, context: CallbackContext):
                 )
             else:
                 sent = send(update, res, keyboard, backup_message)
-            prev_welc = sql.get_clean_pref(chat.id)
-            if prev_welc:
+            if prev_welc := sql.get_clean_pref(chat.id):
                 try:
                     bot.delete_message(chat.id, prev_welc)
                 except BadRequest:
@@ -474,7 +468,7 @@ def check_not_bot(member, chat_id, message_id, context):
     if not member_status:
         try:
             bot.unban_chat_member(chat_id, member.id)
-        except:
+        except Exception:
             pass
 
         try:
@@ -483,7 +477,7 @@ def check_not_bot(member, chat_id, message_id, context):
                 chat_id=chat_id,
                 message_id=message_id,
             )
-        except:
+        except Exception:
             pass
 
 
@@ -498,18 +492,14 @@ def left_member(update: Update, context: CallbackContext):
 
     if should_goodbye:
         reply = update.message.message_id
-        cleanserv = sql.clean_service(chat.id)
-        # Clean service welcome
-        if cleanserv:
+        if cleanserv := sql.clean_service(chat.id):
             try:
                 dispatcher.bot.delete_message(chat.id, update.message.message_id)
             except BadRequest:
                 pass
             reply = False
 
-        left_mem = update.effective_message.left_chat_member
-        if left_mem:
-
+        if left_mem := update.effective_message.left_chat_member:
             # Dont say goodbyes to gbanned users
             if is_user_gbanned(left_mem.id):
                 return
@@ -519,7 +509,7 @@ def left_member(update: Update, context: CallbackContext):
                 return
 
             # if media goodbye, use appropriate function for it
-            if goodbye_type != sql.Types.TEXT and goodbye_type != sql.Types.BUTTON_TEXT:
+            if goodbye_type not in [sql.Types.TEXT, sql.Types.BUTTON_TEXT]:
                 ENUM_FUNC_MAP[goodbye_type](chat.id, cust_goodbye)
                 return
 
@@ -588,7 +578,7 @@ def welcome(update: Update, context: CallbackContext):
             parse_mode=ParseMode.MARKDOWN,
         )
 
-        if welcome_type == sql.Types.BUTTON_TEXT or welcome_type == sql.Types.TEXT:
+        if welcome_type in [sql.Types.BUTTON_TEXT, sql.Types.TEXT]:
             buttons = sql.get_welc_buttons(chat.id)
             if noformat:
                 welcome_m += revert_buttons(buttons)
@@ -662,14 +652,13 @@ def goodbye(update: Update, context: CallbackContext):
 
                 send(update, goodbye_m, keyboard, sql.DEFAULT_GOODBYE)
 
-        else:
-            if noformat:
-                ENUM_FUNC_MAP[goodbye_type](chat.id, goodbye_m)
+        elif noformat:
+            ENUM_FUNC_MAP[goodbye_type](chat.id, goodbye_m)
 
-            else:
-                ENUM_FUNC_MAP[goodbye_type](
-                    chat.id, goodbye_m, parse_mode=ParseMode.MARKDOWN
-                )
+        else:
+            ENUM_FUNC_MAP[goodbye_type](
+                chat.id, goodbye_m, parse_mode=ParseMode.MARKDOWN
+            )
 
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
@@ -835,8 +824,7 @@ def clean_welcome(update: Update, context: CallbackContext) -> str:
     user = update.effective_user
 
     if not args:
-        clean_pref = sql.get_clean_pref(chat.id)
-        if clean_pref:
+        if clean_pref := sql.get_clean_pref(chat.id):
             update.effective_message.reply_text(
                 "I should be deleting welcome messages up to two days old."
             )
@@ -871,9 +859,9 @@ def clean_welcome(update: Update, context: CallbackContext) -> str:
 
 @user_admin
 def cleanservice(update: Update, context: CallbackContext) -> str:
-    args = context.args
     chat = update.effective_chat  # type: Optional[Chat]
     if chat.type != chat.PRIVATE:
+        args = context.args
         if len(args) >= 1:
             var = args[0]
             if var in ("no", "off"):
@@ -891,16 +879,14 @@ def cleanservice(update: Update, context: CallbackContext) -> str:
                 "Usage is <code>on</code>/<code>yes</code> or <code>off</code>/<code>no</code>",
                 parse_mode=ParseMode.HTML,
             )
+    elif curr := sql.clean_service(chat.id):
+        update.effective_message.reply_text(
+            "Welcome clean service is : <code>on</code>", parse_mode=ParseMode.HTML
+        )
     else:
-        curr = sql.clean_service(chat.id)
-        if curr:
-            update.effective_message.reply_text(
-                "Welcome clean service is : <code>on</code>", parse_mode=ParseMode.HTML
-            )
-        else:
-            update.effective_message.reply_text(
-                "Welcome clean service is : <code>off</code>", parse_mode=ParseMode.HTML
-            )
+        update.effective_message.reply_text(
+            "Welcome clean service is : <code>off</code>", parse_mode=ParseMode.HTML
+        )
 
 
 def user_button(update: Update, context: CallbackContext):
@@ -910,7 +896,7 @@ def user_button(update: Update, context: CallbackContext):
     bot = context.bot
     match = re.match(r"user_join_\((.+?)\)", query.data)
     message = update.effective_message
-    join_user = int(match.group(1))
+    join_user = int(match[1])
 
     if join_user == user.id:
         sql.set_human_checks(user.id, chat.id)
@@ -934,7 +920,7 @@ def user_button(update: Update, context: CallbackContext):
         )
         try:
             bot.deleteMessage(chat.id, message.message_id)
-        except:
+        except Exception:
             pass
         if member_dict["should_welc"]:
             if member_dict["media_wel"]:
@@ -953,13 +939,9 @@ def user_button(update: Update, context: CallbackContext):
                     member_dict["backup_message"],
                 )
 
-            prev_welc = sql.get_clean_pref(chat.id)
-            if prev_welc:
-                try:
+            if prev_welc := sql.get_clean_pref(chat.id):
+                with suppress(BadRequest):
                     bot.delete_message(chat.id, prev_welc)
-                except BadRequest:
-                    pass
-
                 if sent:
                     sql.set_clean_welcome(chat.id, sent.message_id)
 
@@ -1035,10 +1017,7 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(chat_id, user_id):
     welcome_pref = sql.get_welc_pref(chat_id)[0]
     goodbye_pref = sql.get_gdbye_pref(chat_id)[0]
-    return (
-        "This chat has it's welcome preference set to `{}`.\n"
-        "It's goodbye preference is `{}`.".format(welcome_pref, goodbye_pref)
-    )
+    return f"This chat has it's welcome preference set to `{welcome_pref}`.\nIt's goodbye preference is `{goodbye_pref}`."
 
 
 __help__ = """

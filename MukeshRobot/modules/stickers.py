@@ -135,10 +135,7 @@ def cb_sticker(update: Update, context: CallbackContext):
     if len(query) > 50:
         msg.reply_text("ᴘʀᴏᴠɪᴅᴇ ᴀ sᴇᴀʀᴄʜ ǫᴜᴇʀʏ ᴜɴᴅᴇʀ 50 ᴄʜᴀʀᴀᴄᴛᴇʀs")
         return
-    if msg.from_user:
-        user_id = msg.from_user.id
-    else:
-        user_id = None
+    user_id = msg.from_user.id if msg.from_user else None
     text, buttons = get_cbs_data(query, 1, user_id)
     msg.reply_text(text, parse_mode=ParseMode.HTML, reply_markup=buttons)
 
@@ -156,11 +153,11 @@ def cbs_callback(update: Update, context: CallbackContext):
 
 
 def getsticker(update: Update, context: CallbackContext):
-    bot = context.bot
     msg = update.effective_message
-    chat_id = update.effective_chat.id
     if msg.reply_to_message and msg.reply_to_message.sticker:
         file_id = msg.reply_to_message.sticker.file_id
+        bot = context.bot
+        chat_id = update.effective_chat.id
         with BytesIO() as file:
             file.name = "sticker.png"
             new_file = bot.get_file(file_id)
@@ -234,7 +231,7 @@ def kang(update, context):
             kang_file.download("kangsticker.tgs")
         elif is_video and not is_gif:
             kang_file.download("kangsticker.webm")
-        elif is_gif:
+        else:
             kang_file.download("kang.mp4")
             convert_gif("kang.mp4")
 
@@ -438,7 +435,7 @@ def kang(update, context):
                     )
                 print(e)
 
-        elif is_video or is_gif:
+        else:
             packname = "video" + str(user.id) + "_by_" + context.bot.username
             packname_found = 0
             max_stickers = 50
@@ -622,7 +619,7 @@ def kang(update, context):
         packs_text = "*ᴘʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ, ᴏʀ ɪᴍᴀɢᴇ ᴛᴏ ᴋᴀɴɢ ɪᴛ!*\n"
         if packnum > 0:
             firstpackname = "a" + str(user.id) + "_by_" + context.bot.username
-            for i in range(0, packnum + 1):
+            for i in range(packnum + 1):
                 if i == 0:
                     packs = f"t.me/addstickers/{firstpackname}"
                 else:
@@ -650,7 +647,7 @@ def kang(update, context):
             os.remove("kangsticker.webm")
         elif os.path.isfile("kang.mp4"):
             os.remove("kang.mp4")
-    except:
+    except Exception:
         pass
 
 
@@ -677,16 +674,12 @@ def makepack_internal(
                             ]
                         ]
                     )  
-    
-    
+
+
     try:
-        extra_version = ""
-        if packnum > 0:
-            extra_version = " " + str(packnum)
+        extra_version = f" {str(packnum)}" if packnum > 0 else ""
         if png_sticker:
-            sticker_pack_name = (
-                f"{name}'s sticker pack (@{context.bot.username})" + extra_version
-            )
+            sticker_pack_name = f"{name}'s sticker pack (@{context.bot.username}){extra_version}"
             success = context.bot.create_new_sticker_set(
                 user.id,
                 packname,
@@ -695,9 +688,7 @@ def makepack_internal(
                 emojis=emoji,
             )
         if tgs_sticker:
-            sticker_pack_name = (
-                f"{name}'s animated pack (@{context.bot.username})" + extra_version
-            )
+            sticker_pack_name = f"{name}'s animated pack (@{context.bot.username}){extra_version}"
             success = context.bot.create_new_sticker_set(
                 user.id,
                 packname,
@@ -707,7 +698,7 @@ def makepack_internal(
             )
         if webm_sticker:
             sticker_pack_name = (
-                f"{name}'s video pack (@{context.bot.username})" + extra_version
+                f"{name}'s video pack (@{context.bot.username}){extra_version}"
             )
             success = context.bot.create_new_sticker_set(
                 user.id,
@@ -727,7 +718,7 @@ def makepack_internal(
                 reply_markup=keyboard,
                 parse_mode=ParseMode.HTML,
             )
-        elif e.message == "Peer_id_invalid" or "bot was blocked by the user":
+        else:
             msg.reply_text(
                 f"{context.bot.first_name} was blocked by you.",
                 reply_markup=InlineKeyboardMarkup(
@@ -739,14 +730,6 @@ def makepack_internal(
                         ]
                     ]
                 ),
-            )
-        elif e.message == "Internal Server Error: created sticker set not found (500)":
-            msg.reply_text(
-                "<b>Your Sticker Pack has been created!</b>"
-                "\n\nYou can now reply to images, stickers and animated sticker with /steal to add them to your pack"
-                "\n\n<b>Send /stickers to find sticker pack.</b>",
-                reply_markup=keyboard,
-                parse_mode=ParseMode.HTML,
             )
         return
 
@@ -763,13 +746,13 @@ def makepack_internal(
 
 
 def getsticker(update: Update, context: CallbackContext):
-    bot = context.bot
     msg = update.effective_message
-    chat_id = update.effective_chat.id
     if msg.reply_to_message and msg.reply_to_message.sticker:
         file_id = msg.reply_to_message.sticker.file_id
+        bot = context.bot
         new_file = bot.get_file(file_id)
         new_file.download("sticker.png")
+        chat_id = update.effective_chat.id
         bot.send_document(chat_id, document=open("sticker.png", "rb"))
         os.remove("sticker.png")
     else:
@@ -779,13 +762,13 @@ def getsticker(update: Update, context: CallbackContext):
 
 
 def getvidsticker(update: Update, context: CallbackContext):
-    bot = context.bot
     msg = update.effective_message
-    chat_id = update.effective_chat.id
     if msg.reply_to_message and msg.reply_to_message.sticker:
         file_id = msg.reply_to_message.sticker.file_id
+        bot = context.bot
         new_file = bot.get_file(file_id)
         new_file.download("sticker.mp4")
+        chat_id = update.effective_chat.id
         bot.send_video(chat_id, video=open("sticker.mp4", "rb"))
         os.remove("sticker.mp4")
     else:
@@ -807,13 +790,13 @@ def delsticker(update, context):
 
 
 def video(update: Update, context: CallbackContext):
-    bot = context.bot
     msg = update.effective_message
-    chat_id = update.effective_chat.id
     if msg.reply_to_message and msg.reply_to_message.animation:
         file_id = msg.reply_to_message.animation.file_id
+        bot = context.bot
         new_file = bot.get_file(file_id)
         new_file.download("video.mp4")
+        chat_id = update.effective_chat.id
         bot.send_video(chat_id, video=open("video.mp4", "rb"))
         os.remove("video.mp4")
     else:

@@ -23,7 +23,7 @@ async def short_urls(bot, message):
 # Check if any URLs were found
 #     if link not in urls:
 #                         return	await message.reply_text("this is not valid provide url")
-#     else:                         
+#     else:
     try:
 
         tiny_link = shortener.tinyurl.short(link)
@@ -42,10 +42,12 @@ async def short_urls(bot, message):
          ikb("Clckru Url",url=clckru_link)
         ]
         ]
-        await message.reply_text(f"Here are few shortened links :",reply_markup=ikm(url))
+        await message.reply_text(
+            "Here are few shortened links :", reply_markup=ikm(url)
+        )
 
     except Exception as e:
-        await message.reply_text(f"Either the link is already shortened or is invalid.")
+        await message.reply_text("Either the link is already shortened or is invalid.")
 
 @mukesh.on_message(filters.command(["unshort"]))
 async def unshort(bot, message):

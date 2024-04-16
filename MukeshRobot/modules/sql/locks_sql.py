@@ -49,7 +49,7 @@ class Permissions(BASE):
         self.inline = False
 
     def __repr__(self):
-        return "<Permissions for %s>" % self.chat_id
+        return f"<Permissions for {self.chat_id}>"
 
 
 class Restrictions(BASE):
@@ -69,7 +69,7 @@ class Restrictions(BASE):
         self.preview = False
 
     def __repr__(self):
-        return "<Restrictions for %s>" % self.chat_id
+        return f"<Restrictions for {self.chat_id}>"
 
 
 # For those who faced database error, Just uncomment the
@@ -107,9 +107,7 @@ def init_restrictions(chat_id, reset=False):
 
 def update_lock(chat_id, lock_type, locked):
     with PERM_LOCK:
-        curr_perm = SESSION.query(Permissions).get(str(chat_id))
-        if not curr_perm:
-            curr_perm = init_permissions(chat_id)
+        curr_perm = SESSION.query(Permissions).get(str(chat_id)) or init_permissions(chat_id)
 
         if lock_type == "audio":
             curr_perm.audio = locked
@@ -152,9 +150,7 @@ def update_lock(chat_id, lock_type, locked):
 
 def update_restriction(chat_id, restr_type, locked):
     with RESTR_LOCK:
-        curr_restr = SESSION.query(Restrictions).get(str(chat_id))
-        if not curr_restr:
-            curr_restr = init_restrictions(chat_id)
+        curr_restr = SESSION.query(Restrictions).get(str(chat_id)) or init_restrictions(chat_id)
 
         if restr_type == "messages":
             curr_restr.messages = locked
@@ -256,13 +252,11 @@ def get_restr(chat_id):
 
 def migrate_chat(old_chat_id, new_chat_id):
     with PERM_LOCK:
-        perms = SESSION.query(Permissions).get(str(old_chat_id))
-        if perms:
+        if perms := SESSION.query(Permissions).get(str(old_chat_id)):
             perms.chat_id = str(new_chat_id)
         SESSION.commit()
 
     with RESTR_LOCK:
-        rest = SESSION.query(Restrictions).get(str(old_chat_id))
-        if rest:
+        if rest := SESSION.query(Restrictions).get(str(old_chat_id)):
             rest.chat_id = str(new_chat_id)
         SESSION.commit()

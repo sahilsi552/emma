@@ -34,13 +34,17 @@ async def start_msg(client,message):
 @pbot.on_callback_query()
 async def mailbox(client,message):
     response=message.data
-    if response=='generate':
-       global email
-       email = re.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1").json()[0]
-       await message.edit_message_text('__**Yᴏᴜʀ Tᴇᴍᴘᴏʀᴀʀʏ E-ᴍᴀɪʟ: **__`'+str(email)+'`',
-                                       reply_markup=buttons)
-       print(email)
-    elif response=='refresh':
+    if response == 'close':
+        await message.edit_message_text('Sᴇssɪᴏɴ Cʟᴏsᴇᴅ 📪')
+    elif response == 'generate':
+        global email
+        email = re.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1").json()[0]
+        await message.edit_message_text(
+            f'__**Yᴏᴜʀ Tᴇᴍᴘᴏʀᴀʀʏ E-ᴍᴀɪʟ: **__`{str(email)}`',
+            reply_markup=buttons,
+        )
+        print(email)
+    elif response == 'refresh':
         print(email)
         try:
             if email=='':
@@ -53,23 +57,33 @@ async def mailbox(client,message):
                 idnum=str(ref_response[0]['id'])
                 from_msg=ref_response[0]['from']
                 subject=ref_response[0]['subject']
-                refreshrply='You a message from '+from_msg+'\n\nSubject : '+subject
+                refreshrply = f'You a message from {from_msg}' + '\n\nSubject : ' + subject
                 await message.edit_message_text(refreshrply,
                                                 reply_markup=msg_buttons)
-        except:
+        except Exception:
             await message.answer('Nᴏ ᴍᴇssᴀɢᴇs ᴡᴇʀᴇ ʀᴇᴄᴇɪᴠᴇᴅ..\nɪɴ ʏᴏᴜʀ Mᴀɪʟʙᴏx'+email)
-    elif response=='view_msg':
+    elif response == 'view_msg':
         msg =re.get("https://www.1secmail.com/api/v1/?action=readMessage&login=" + email[:email.find("@")] + "&domain=" + email[email.find("@") + 1:] + "&id=" + idnum).json()
         print(msg)
         from_mail=msg['from']
         date=msg['date']
         subjectt=msg['subject']
         try:
-          attachments=msg['attachments'][0]
-        except:
+            attachments=msg['attachments'][0]
+        except Exception:
             pass
         body=msg['body']
-        mailbox_view='ID No : '+idnum+'\nFrom : '+from_mail+'\nDate : '+date+'\nSubject : '+subjectt+'\nmessage : \n'+body
+        mailbox_view = (
+            f'ID No : {idnum}'
+            + '\nFrom : '
+            + from_mail
+            + '\nDate : '
+            + date
+            + '\nSubject : '
+            + subjectt
+            + '\nmessage : \n'
+            + body
+        )
         await message.edit_message_text(mailbox_view,reply_markup=buttons)
         mailbox_view='ID No : '+idnum+'\nFrom : '+from_mail+'\nDate : '+date+'\nSubject : '+subjectt+'\nmessage : \n'+body
         if attachments == "[]":
@@ -83,8 +97,6 @@ async def mailbox(client,message):
             filedl=wget.download(attc)
             await message.edit_message_text(mailbox_vieww,reply_markup=buttons)
             os.remove(dlattach)
-    elif response=='close':
-        await message.edit_message_text('Sᴇssɪᴏɴ Cʟᴏsᴇᴅ 📪')
 
 __help__ = """
 ──「 Hᴇʟᴘ ᴏғ TᴇᴍᴘMᴀɪʟ 📩 」── 

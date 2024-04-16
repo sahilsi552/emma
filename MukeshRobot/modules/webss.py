@@ -10,7 +10,7 @@ from MukeshRobot.utils.post import post
 
 
 async def take_screenshot(url: str, full: bool = False):
-    url = "https://" + url if not url.startswith("http") else url
+    url = url if url.startswith("http") else f"https://{url}"
     payload = {
         "url": url,
         "width": 1920,
@@ -70,10 +70,7 @@ async def take_ss(_, message: Message):
 
         m = await m.edit("ᴜᴘʟᴏᴀᴅɪɴɢ...")
 
-        if not full:
-            await message.reply_document(photo)
-        else:
-            await message.reply_document(photo)
+        await message.reply_document(photo)
         await m.delete()
     except Exception as e:
         await m.edit(str(e))

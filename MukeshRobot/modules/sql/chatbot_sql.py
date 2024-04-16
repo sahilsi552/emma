@@ -27,16 +27,13 @@ def is_mukesh(chat_id):
 
 def set_mukesh(chat_id):
     with INSERTION_LOCK:
-        mukeshchat = SESSION.query(MukeshChats).get(str(chat_id))
-        if not mukeshchat:
-            mukeshchat = MukeshChats(str(chat_id))
+        mukeshchat = SESSION.query(MukeshChats).get(str(chat_id)) or MukeshChats(str(chat_id))
         SESSION.add(mukeshchat)
         SESSION.commit()
 
 
 def rem_mukesh(chat_id):
     with INSERTION_LOCK:
-        mukeshchat = SESSION.query(MukeshChats).get(str(chat_id))
-        if mukeshchat:
+        if mukeshchat := SESSION.query(MukeshChats).get(str(chat_id)):
             SESSION.delete(mukeshchat)
         SESSION.commit()
