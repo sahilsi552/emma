@@ -99,7 +99,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(
-                            text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat="google"
+                            text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""
                         ),
         InlineKeyboardButton(
                             text="Hᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ ⁉️",

@@ -14,22 +14,34 @@ import requests
 from bs4 import BeautifulSoup as bs
 from PIL import Image
 from telegram import (
+    Bot,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     ParseMode,
     TelegramError,
     Update,
 )
-from telegram.ext import CallbackContext
+from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
+
 from telegram.utils.helpers import mention_html
 
 from MukeshRobot import dispatcher
+from MukeshRobot.events import register as mukesh
 from MukeshRobot.modules.disable import DisableAbleCommandHandler
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
+def sticker_count(bot: Bot, pname: str) -> int:
+    resp = bot._request.post(
+        f"{bot.base_url}/getStickerSet",
+        {
+            "name": pname,
+        },
+    )
+    return len(resp["stickers"])
+
 def convert_gif(input):
-    """ғᴜɴᴄᴛɪᴏɴ ᴛᴏ ᴄᴏɴᴠᴇʀᴛ ᴍᴘ4 ᴛᴏ ᴡᴇʙᴍ(ᴠᴘ9)!(ᴀʙɪsʜɴᴏɪ)"""
+    """ғᴜɴᴄᴛɪᴏɴ ᴛᴏ ᴄᴏɴᴠᴇʀᴛ ᴍᴘ4 ᴛᴏ ᴡᴇʙᴍ(ᴠᴘ9)"""
 
     vid = cv2.VideoCapture(input)
     height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
@@ -157,13 +169,17 @@ def getsticker(update: Update, context: CallbackContext):
     if msg.reply_to_message and msg.reply_to_message.sticker:
         file_id = msg.reply_to_message.sticker.file_id
         bot = context.bot
-        chat_id = update.effective_chat.id
-        with BytesIO() as file:
-            file.name = "sticker.png"
-            new_file = bot.get_file(file_id)
-            new_file.download(out=file)
-            file.seek(0)
-            bot.send_document(chat_id, document=file)
+        is_anim = msg.reply_to_message.sticker.is_animated
+        sticker_data = bot.get_file(file_id).download(out=BytesIO())
+        sticker_data.seek(0)
+        filename = "animated_sticker.tgs.hmm_" if is_anim else "sticker.png"
+        
+        bot.send_document(
+            update.effective_chat.id,
+            document=sticker_data,
+            filename=filename,
+        )
+
     else:
         update.effective_message.reply_text(
             "ᴘʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ ғᴏʀ ᴍᴇ ᴛᴏ ᴜᴘʟᴏᴀᴅ ɪᴛs PNG.",
@@ -172,26 +188,18 @@ def getsticker(update: Update, context: CallbackContext):
 
 def kang(update, context):
     msg = update.effective_message
-    user = update.effective_user
     args = context.args
     packnum = 0
-    packname = "a" + str(user.id) + "_by_" + context.bot.username
+    user = update.effective_user
+    packname = f"a{str(user.id)}_by_{context.bot.username}"
     packname_found = 0
     max_stickers = 120
 
     while packname_found == 0:
         try:
-            stickerset = context.bot.get_sticker_set(packname)
-            if len(stickerset.stickers) >= max_stickers:
+            if sticker_count(context.bot, packname) >= max_stickers:
                 packnum += 1
-                packname = (
-                    "a"
-                    + str(packnum)
-                    + "_"
-                    + str(user.id)
-                    + "_by_"
-                    + context.bot.username
-                )
+                packname = f"a{str(packnum)}_{str(user.id)}_by_{context.bot.username}"
             else:
                 packname_found = 1
         except TelegramError as e:
@@ -216,7 +224,7 @@ def kang(update, context):
             file_id = msg.reply_to_message.photo[-1].file_id
         elif (
             msg.reply_to_message.document
-            and not msg.reply_to_message.document.mime_type == "video/mp4"
+            and msg.reply_to_message.document.mime_type != "video/mp4"
         ):
             file_id = msg.reply_to_message.document.file_id
         elif msg.reply_to_message.animation:
@@ -225,7 +233,7 @@ def kang(update, context):
         else:
             msg.reply_text("ʏᴇᴀ, ɪ ᴄᴀɴ'ᴛ ᴋᴀɴɢ ᴛʜᴀᴛ.")
         kang_file = context.bot.get_file(file_id)
-        if not is_animated and not (is_video or is_gif):
+        if not is_animated and not is_video and not is_gif:
             kang_file.download("kangsticker.png")
         elif is_animated:
             kang_file.download("kangsticker.tgs")
@@ -240,14 +248,14 @@ def kang(update, context):
         elif msg.reply_to_message.sticker and msg.reply_to_message.sticker.emoji:
             sticker_emoji = msg.reply_to_message.sticker.emoji
         else:
-            sticker_emoji = "❤️"
+            sticker_emoji = "🙂"
 
         adding_process = msg.reply_text(
             "<b>ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ...ғᴏʀ ᴀ ᴍᴏᴍᴇɴᴛ</b>",
             parse_mode=ParseMode.HTML,
         )
 
-        if not is_animated and not (is_video or is_gif):
+        if not is_animated and not is_video and not is_gif:
             try:
                 im = Image.open(kangsticker)
                 maxsize = (512, 512)
@@ -276,19 +284,19 @@ def kang(update, context):
                     png_sticker=open("kangsticker.png", "rb"),
                     emojis=sticker_emoji,
                 )
-                keyboard = InlineKeyboardMarkup(
+                edited_keyboard = InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
+                            InlineKeyboardButton(
+                                text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
+                            )
                         ]
-                    )  
+                    ]
+                )
                 adding_process.edit_text(
                     f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                     f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                    reply_markup=keyboard,
+                    reply_markup=edited_keyboard,
                     parse_mode=ParseMode.HTML,
                 )
 
@@ -297,18 +305,27 @@ def kang(update, context):
                 return
 
             except TelegramError as e:
-                if e.message == "Stickerset_invalid":
-                    makepack_internal(
-                        update,
-                        context,
-                        msg,
-                        user,
-                        sticker_emoji,
-                        packname,
-                        packnum,
-                        png_sticker=open("kangsticker.png", "rb"),
+                if (
+                    e.message
+                    == "Internal Server Error: sticker set not found (500)"
+                ):
+                    edited_keyboard = InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
+                                )
+                            ]
+                        ]
                     )
-                    adding_process.delete()
+                    msg.reply_text(
+                        f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
+                        f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
+                        reply_markup=edited_keyboard,
+                        parse_mode=ParseMode.HTML,
+                    )
+                elif e.message == "Invalid sticker emojis":
+                    msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Sticker_png_dimensions":
                     im.save(kangsticker, "PNG")
                     adding_process = msg.reply_text(
@@ -321,60 +338,46 @@ def kang(update, context):
                         png_sticker=open("kangsticker.png", "rb"),
                         emojis=sticker_emoji,
                     )
-                    keyboard = InlineKeyboardMarkup(
+                    edited_keyboard = InlineKeyboardMarkup(
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
+                                    text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
                                 )
                             ]
                         ]
-                    )  
+                    )
                     adding_process.edit_text(
                         f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                         f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                        reply_markup=keyboard,
+                        reply_markup=edited_keyboard,
                         parse_mode=ParseMode.HTML,
                     )
-                elif e.message == "Invalid sticker emojis":
-                    msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Stickers_too_much":
                     msg.reply_text("Max packsize reached. Press F to pay respecc.")
-                elif e.message == "Internal Server Error: sticker set not found (500)":
-                    keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
-                    msg.reply_text(
-                        f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
-                        f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                        reply_markup=keyboard,
-                        parse_mode=ParseMode.HTML,
+                elif e.message == "Stickerset_invalid":
+                    makepack_internal(
+                        update,
+                        context,
+                        msg,
+                        user,
+                        sticker_emoji,
+                        packname,
+                        packnum,
+                        png_sticker=open("kangsticker.png", "rb"),
                     )
+                    adding_process.delete()
                 print(e)
 
         elif is_animated:
-            packname = "animated" + str(user.id) + "_by_" + context.bot.username
+            packname = f"animated{str(user.id)}_by_{context.bot.username}"
             packname_found = 0
             max_stickers = 50
             while packname_found == 0:
                 try:
-                    stickerset = context.bot.get_sticker_set(packname)
-                    if len(stickerset.stickers) >= max_stickers:
+                    if sticker_count(context.bot, packname) >= max_stickers:
                         packnum += 1
-                        packname = (
-                            "animated"
-                            + str(packnum)
-                            + "_"
-                            + str(user.id)
-                            + "_by_"
-                            + context.bot.username
-                        )
+                        packname = f"animated{str(packnum)}_{str(user.id)}_by_{context.bot.username}"
                     else:
                         packname_found = 1
                 except TelegramError as e:
@@ -387,23 +390,44 @@ def kang(update, context):
                     tgs_sticker=open("kangsticker.tgs", "rb"),
                     emojis=sticker_emoji,
                 )
-                keyboard = InlineKeyboardMarkup(
+                edited_keyboard = InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
+                            InlineKeyboardButton(
+                                text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
+                            )
                         ]
-                    )  
+                    ]
+                )
                 adding_process.edit_text(
                     f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                     f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                    reply_markup=keyboard,
+                    reply_markup=edited_keyboard,
                     parse_mode=ParseMode.HTML,
                 )
             except TelegramError as e:
-                if e.message == "Stickerset_invalid":
+                if (
+                    e.message
+                    == "Internal Server Error: sticker set not found (500)"
+                ):
+                    edited_keyboard = InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
+                                )
+                            ]
+                        ]
+                    )
+                    adding_process.edit_text(
+                        f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
+                        f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
+                        reply_markup=edited_keyboard,
+                        parse_mode=ParseMode.HTML,
+                    )
+                elif e.message == "Invalid sticker emojis":
+                    msg.reply_text("Invalid emoji(s).")
+                elif e.message == "Stickerset_invalid":
                     makepack_internal(
                         update,
                         context,
@@ -415,34 +439,15 @@ def kang(update, context):
                         tgs_sticker=open("kangsticker.tgs", "rb"),
                     )
                     adding_process.delete()
-                elif e.message == "Invalid sticker emojis":
-                    msg.reply_text("Invalid emoji(s).")
-                elif e.message == "Internal Server Error: sticker set not found (500)":
-                    keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
-                    adding_process.edit_text(
-                        f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
-                        f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                        reply_markup=keyboard,
-                        parse_mode=ParseMode.HTML,
-                    )
                 print(e)
 
         else:
-            packname = "video" + str(user.id) + "_by_" + context.bot.username
+            packname = f"video{str(user.id)}_by_{context.bot.username}"
             packname_found = 0
             max_stickers = 50
             while packname_found == 0:
                 try:
-                    stickerset = context.bot.get_sticker_set(packname)
-                    if len(stickerset.stickers) >= max_stickers:
+                    if sticker_count(context.bot, packname) >= max_stickers:
                         packnum += 1
                         packname = (
                             "video"
@@ -464,23 +469,44 @@ def kang(update, context):
                     webm_sticker=open("kangsticker.webm", "rb"),
                     emojis=sticker_emoji,
                 )
-                keyboard = InlineKeyboardMarkup(
+                edited_keyboard = InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
+                            InlineKeyboardButton(
+                                text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
+                            )
                         ]
-                    )  
+                    ]
+                )
                 adding_process.edit_text(
                     f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                     f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                    reply_markup=keyboard,
+                    reply_markup=edited_keyboard,
                     parse_mode=ParseMode.HTML,
                 )
             except TelegramError as e:
-                if e.message == "Stickerset_invalid":
+                if (
+                    e.message
+                    == "Internal Server Error: sticker set not found (500)"
+                ):
+                    edited_keyboard = InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
+                                )
+                            ]
+                        ]
+                    )
+                    adding_process.edit_text(
+                        f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
+                        f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
+                        reply_markup=edited_keyboard,
+                        parse_mode=ParseMode.HTML,
+                    )
+                elif e.message == "Invalid sticker emojis":
+                    msg.reply_text("Invalid emoji(s).")
+                elif e.message == "Stickerset_invalid":
                     makepack_internal(
                         update,
                         context,
@@ -492,24 +518,6 @@ def kang(update, context):
                         webm_sticker=open("kangsticker.webm", "rb"),
                     )
                     adding_process.delete()
-                elif e.message == "Invalid sticker emojis":
-                    msg.reply_text("Invalid emoji(s).")
-                elif e.message == "Internal Server Error: sticker set not found (500)":
-                    keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )
-                    adding_process.edit_text(
-                        f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
-                        f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                        reply_markup=keyboard,
-                        parse_mode=ParseMode.HTML,
-                    )
                 print(e)
 
     elif args:
@@ -548,19 +556,19 @@ def kang(update, context):
                 png_sticker=open("kangsticker.png", "rb"),
                 emojis=sticker_emoji,
             )
-            keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
+            edited_keyboard = InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
+                        )
+                    ]
+                ]
+            )
             adding_process.edit_text(
                 f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
                 f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                reply_markup=keyboard,
+                reply_markup=edited_keyboard,
                 parse_mode=ParseMode.HTML,
             )
         except OSError as e:
@@ -568,7 +576,44 @@ def kang(update, context):
             print(e)
             return
         except TelegramError as e:
-            if e.message == "Stickerset_invalid":
+            if (
+                e.message
+                == "Internal Server Error: sticker set not found (500)"
+            ):
+                msg.reply_text(
+                    f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
+                    f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
+                    reply_markup=edited_keyboard,
+                    parse_mode=ParseMode.HTML,
+                )
+            elif e.message == "Invalid sticker emojis":
+                msg.reply_text("Invalid emoji(s).")
+            elif e.message == "Sticker_png_dimensions":
+                im.save(kangsticker, "png")
+                context.bot.add_sticker_to_set(
+                    user_id=user.id,
+                    name=packname,
+                    png_sticker=open("kangsticker.png", "rb"),
+                    emojis=sticker_emoji,
+                )
+                edited_keyboard = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}"
+                            )
+                        ]
+                    ]
+                )
+                adding_process.edit_text(
+                    f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
+                    f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
+                    reply_markup=edited_keyboard,
+                    parse_mode=ParseMode.HTML,
+                )
+            elif e.message == "Stickers_too_much":
+                msg.reply_text("Max packsize reached. Press F to pay respect.")
+            elif e.message == "Stickerset_invalid":
                 makepack_internal(
                     update,
                     context,
@@ -580,45 +625,11 @@ def kang(update, context):
                     png_sticker=open("kangsticker.png", "rb"),
                 )
                 adding_process.delete()
-            elif e.message == "Sticker_png_dimensions":
-                im.save(kangsticker, "png")
-                context.bot.add_sticker_to_set(
-                    user_id=user.id,
-                    name=packname,
-                    png_sticker=open("kangsticker.png", "rb"),
-                    emojis=sticker_emoji,
-                )
-                keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
-                adding_process.edit_text(
-                    f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
-                    f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                    reply_markup=keyboard,
-                    parse_mode=ParseMode.HTML,
-                )
-            elif e.message == "Invalid sticker emojis":
-                msg.reply_text("Invalid emoji(s).")
-            elif e.message == "Stickers_too_much":
-                msg.reply_text("Max packsize reached. Press F to pay respect.")
-            elif e.message == "Internal Server Error: sticker set not found (500)":
-                msg.reply_text(
-                    f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>"
-                    f"\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}",
-                    reply_markup=edited_keyboard,
-                    parse_mode=ParseMode.HTML,
-                )
             print(e)
     else:
         packs_text = "*ᴘʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ, ᴏʀ ɪᴍᴀɢᴇ ᴛᴏ ᴋᴀɴɢ ɪᴛ!*\n"
         if packnum > 0:
-            firstpackname = "a" + str(user.id) + "_by_" + context.bot.username
+            firstpackname = f"a{str(user.id)}_by_{context.bot.username}"
             for i in range(packnum + 1):
                 if i == 0:
                     packs = f"t.me/addstickers/{firstpackname}"
@@ -626,17 +637,16 @@ def kang(update, context):
                     packs = f"t.me/addstickers/{packname}"
         else:
             packs = f"t.me/addstickers/{packname}"
-            keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
+
+        edited_keyboard = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(text="sᴛɪᴄᴋᴇʀ ᴘᴀᴄᴋ", url=f"{packs}"),
+                ],
+            ]
+        )
         msg.reply_text(
-            packs_text, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN
+            packs_text, reply_markup=edited_keyboard, parse_mode=ParseMode.MARKDOWN
         )
     try:
         if os.path.isfile("kangsticker.png"):
@@ -666,16 +676,8 @@ def makepack_internal(
     name = user.first_name
     name = name[:50]
     keyboard = InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="ᴠɪᴇᴡ ᴘᴀᴄᴋ ", url=f"t.me/addstickers/{packname}"
-                                )
-                            ]
-                        ]
-                    )  
-
-
+        [[InlineKeyboardButton(text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}")]]
+    )
     try:
         extra_version = f" {str(packnum)}" if packnum > 0 else ""
         if png_sticker:
@@ -804,7 +806,172 @@ def video(update: Update, context: CallbackContext):
             "Please reply to a gif for me to get it's video."
         )
 
-                             
+
+
+
+@mukesh(pattern="^/mmf ?(.*)")
+async def handler(event):
+    if event.fwd_from:
+        return
+
+    if not event.reply_to_msg_id:
+        await event.reply("Provide Some Text To Draw!")
+
+        return
+
+    reply_message = await event.get_reply_message()
+
+    if not reply_message.media:
+        await event.reply("```ʀᴇᴘʟʏ ᴛᴏ ᴀ ɪᴍᴀɢᴇ/sᴛɪᴄᴋᴇʀ.```")
+
+        return
+
+    file = await bot.download_media(reply_message)
+
+    msg = await event.reply("```ᴍᴇᴍɪғʏɪɴɢ ᴛʜɪs ɪᴍᴀɢᴇ! 😉 ```")
+
+    
+
+    text = str(event.pattern_match.group(1)).strip()
+
+    if not text:
+        return await msg.reply("ʏᴏᴜ ᴍɪɢʜᴛ ᴡᴀɴᴛ ᴛᴏ ᴛʀʏ `/mmf text`")
+
+    meme = await drawText(file, text)
+
+    await bot.send_file(event.chat_id, file=meme, force_document=False)
+
+    await msg.delete()
+
+    os.remove(meme)
+
+
+async def drawText(image_path, text):
+    img = Image.open(image_path)
+
+    os.remove(image_path)
+
+    i_width, i_height = img.size
+
+    fnt = "ariel.ttf" if os.name == "nt" else "./MukeshRobot/modules/resources/default.ttf"
+    m_font = ImageFont.truetype(fnt, int((70 / 640) * i_width))
+
+    if ";" in text:
+        upper_text, lower_text = text.split(";")
+
+    else:
+        upper_text = text
+
+        lower_text = ""
+
+    draw = ImageDraw.Draw(img)
+
+    current_h, pad = 10, 5
+
+    if upper_text:
+        for u_text in textwrap.wrap(upper_text, width=15):
+            u_width, u_height = draw.textsize(u_text, font=m_font)
+
+            draw.text(
+                xy=(((i_width - u_width) / 2) - 2, int((current_h / 640) * i_width)),
+                text=u_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
+
+            draw.text(
+                xy=(((i_width - u_width) / 2) + 2, int((current_h / 640) * i_width)),
+                text=u_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
+
+            draw.text(
+                xy=((i_width - u_width) / 2, int(((current_h / 640) * i_width)) - 2),
+                text=u_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
+
+            draw.text(
+                xy=(((i_width - u_width) / 2), int(((current_h / 640) * i_width)) + 2),
+                text=u_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
+
+            draw.text(
+                xy=((i_width - u_width) / 2, int((current_h / 640) * i_width)),
+                text=u_text,
+                font=m_font,
+                fill=(255, 255, 255),
+            )
+
+            current_h += u_height + pad
+
+    if lower_text:
+        for l_text in textwrap.wrap(lower_text, width=15):
+            u_width, u_height = draw.textsize(l_text, font=m_font)
+
+            draw.text(
+                xy=(
+                    ((i_width - u_width) / 2) - 2,
+                    i_height - u_height - int((20 / 640) * i_width),
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
+
+            draw.text(
+                xy=(
+                    ((i_width - u_width) / 2) + 2,
+                    i_height - u_height - int((20 / 640) * i_width),
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
+
+            draw.text(
+                xy=(
+                    (i_width - u_width) / 2,
+                    (i_height - u_height - int((20 / 640) * i_width)) - 2,
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
+
+            draw.text(
+                xy=(
+                    (i_width - u_width) / 2,
+                    (i_height - u_height - int((20 / 640) * i_width)) + 2,
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(0, 0, 0),
+            )
+
+            draw.text(
+                xy=(
+                    (i_width - u_width) / 2,
+                    i_height - u_height - int((20 / 640) * i_width),
+                ),
+                text=l_text,
+                font=m_font,
+                fill=(255, 255, 255),
+            )
+
+            current_h += u_height + pad
+
+    image_name = "memify.webp"
+
+    webp_file = os.path.join(image_name)
+
+    img.save(webp_file, "webp")
+
+    return webp_file                       
 __help__ = """
  ❍ /sᴛɪᴄᴋᴇʀɪᴅ *:* ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ ᴛᴏ ᴍᴇ ᴛᴏ ᴛᴇʟʟ ʏᴏᴜ ɪᴛs ғɪʟᴇ ɪᴅ.
  ❍ /getsticker *:* ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ ᴛᴏ ᴍᴇ ᴛᴏ ᴜᴘʟᴏᴀᴅ ɪᴛs ʀᴀᴡ ᴘɴɢ ғɪʟᴇ.

@@ -11,18 +11,18 @@ from pyrogram.enums import  ParseMode
 from bs4 import BeautifulSoup
 from .. import pbot as Mukesh,BOT_USERNAME
 
-keywords_list = ["google", "pypi", "github","whisper"]
+
+
+
+keywords_list = ["google", "pypi", "github"]
 PRVT_MSGS = {}
 @Mukesh.on_inline_query()
 async def inline_menu(c: Mukesh, inline_query: InlineQuery):
     if inline_query.query.strip().lower().strip() == "":
-        buttons =[]
-        buttons.add(
-            *[
-                (InlineKeyboardButton(text=i, switch_inline_query_current_chat=i))
-                for i in keywords_list
-            ]
-        )
+        
+        buttons = []
+        buttons.extend([ (InlineKeyboardButton(text=i, switch_inline_query_current_chat=i) ) for i in keywords_list ] )
+
         answerss = [
             InlineQueryResultArticle(
                 title="ɪɴʟɪɴᴇ ᴄᴏᴍᴍᴀɴᴅꜱ",
@@ -31,7 +31,7 @@ async def inline_menu(c: Mukesh, inline_query: InlineQuery):
                     "ᴄʟɪᴄᴋ ᴀ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ sᴛᴀʀᴛᴇᴅ"
                 ),
                 thumb_url="https://hamker.me/cy00x5x.png",
-                reply_markup=buttons,
+                reply_markup=InlineKeyboardMarkup([buttons]),
             )
         ]
         await inline_query.answer(results=answerss)
@@ -58,7 +58,7 @@ async def inline_menu(c: Mukesh, inline_query: InlineQuery):
                 snippet = result.find(
                     "div", class_="VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc lEBKkf"
                 ).get_text()
-            except Exception:
+            except:
                 snippet = "-"
             message_text = f"ᴛɪᴛʟᴇ:  {title}\n ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ : {snippet}"
             data.append(
@@ -251,8 +251,10 @@ async def inline_menu(c: Mukesh, inline_query: InlineQuery):
             switch_pm_text=f"​ғᴏᴜɴᴅ​ {len(data)} ʀᴇꜱᴜʟᴛꜱ",
             switch_pm_parameter="github",
         )
+
+__mod_name__ = "ɪɴʟɪɴᴇ"
 __help__=f"""ᴛᴏ ᴜsᴇ ᴛʜɪs ғᴇᴀᴛᴜʀᴇ, ᴊᴜsᴛ ᴛʏᴘᴇ ʙᴏᴛ ᴜsᴇʀɴᴀᴍᴇ [@{BOT_USERNAME}] ᴡɪᴛʜ ғᴏʟʟᴏᴡɪɴɢ ᴀʀɢs ʙᴇʟᴏᴡ.
 ~ pypi [query] - sᴇᴀʀᴄʜ ᴘᴀᴄᴋᴀɢᴇ ғʀᴏᴍ ᴘʏᴘɪ.
 ~ github [query] - sᴇᴀʀᴄʜ ɪɴ ɢɪᴛ.
 ~ google [ǫᴜᴇʀʏ] - sᴇᴀʀᴄʜ ɪɴ ɢᴏᴏɢʟᴇ."""
-__mod_name__ = "ɪɴʟɪɴᴇ"
+
