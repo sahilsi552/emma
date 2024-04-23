@@ -7,7 +7,7 @@ from MukeshRobot import dispatcher
 from MukeshRobot.modules.helper_funcs.alternate import send_message
 from MukeshRobot.modules.helper_funcs.chat_status import user_admin
 
-__mod_name__ = "Pʜᴏɴᴇ"
+__mod_name__ = "Pʜᴏɴᴇ 📞"
 __help__ = """
 » /phone ꜰɪʟʟ ᴀɴʏ ᴍᴏʙɪʟᴇ ɴᴜᴍʙᴇʀ ᴛᴏ ᴄʜᴇᴄᴋ ɪɴꜰᴏ.
 """
@@ -53,5 +53,5 @@ PHONE_HANDLER = CommandHandler("phone", phone)
 dispatcher.add_handler(PHONE_HANDLER)
 
 
-__command_list__ = ["phone 📳"]
+__command_list__ = ["phone 📞"]
 __handlers__ = [PHONE_HANDLER]
