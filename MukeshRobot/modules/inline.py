@@ -252,7 +252,7 @@ async def inline_menu(c: Mukesh, inline_query: InlineQuery):
             switch_pm_parameter="github",
         )
 
-__mod_name__ = "ɪɴʟɪɴᴇ"
+__mod_name__ = "ɪɴʟɪɴᴇ ⛓️"
 __help__=f"""ᴛᴏ ᴜsᴇ ᴛʜɪs ғᴇᴀᴛᴜʀᴇ, ᴊᴜsᴛ ᴛʏᴘᴇ ʙᴏᴛ ᴜsᴇʀɴᴀᴍᴇ [@{BOT_USERNAME}] ᴡɪᴛʜ ғᴏʟʟᴏᴡɪɴɢ ᴀʀɢs ʙᴇʟᴏᴡ.
 ~ pypi [query] - sᴇᴀʀᴄʜ ᴘᴀᴄᴋᴀɢᴇ ғʀᴏᴍ ᴘʏᴘɪ.
 ~ github [query] - sᴇᴀʀᴄʜ ɪɴ ɢɪᴛ.
