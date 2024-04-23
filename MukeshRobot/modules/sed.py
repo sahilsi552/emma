@@ -120,7 +120,7 @@ def sed(update: Update, context: CallbackContext):
             update.effective_message.reply_to_message.reply_text(text)
 
 
-__mod_name__ = "Sᴇᴅ"
+__mod_name__ = "Sᴇᴅ 🥹"
 
 SED_HANDLER = DisableAbleMessageHandler(
     Filters.regex(f's([{"".join(DELIMITERS)}]).*?\1.*'),
