@@ -44,7 +44,7 @@ def totranslate(update: Update, context: CallbackContext) -> None:
 
     message.reply_text(reply, parse_mode=ParseMode.HTML)
 
-__mod_name__="Tʀᴀɴsʟᴀᴛᴇ"
+__mod_name__="Tʀᴀɴsʟᴀᴛᴇ 🎟️"
 __help__ = """
  ❍ /tr  /tl (ʟᴀɴɢᴜᴀɢᴇ ᴄᴏᴅᴇ) ᴀs ʀᴇᴘʟʏ ᴛᴏ ᴀ ʟᴏɴɢ ᴍᴇssᴀɢᴇ
 *ᴇxᴀᴍᴘʟᴇ:* 
