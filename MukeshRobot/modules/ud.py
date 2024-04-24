@@ -28,5 +28,5 @@ __help__ = """
 """
 __mod_name__ = "Uʀʙᴀɴ"
 
-__command_list__ = ["ud 💫"]
+__command_list__ = ["ud💫"]
 __handlers__ = [UD_HANDLER]
