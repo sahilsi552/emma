@@ -63,8 +63,8 @@ async def distance(bot, message):
     try:
 
         """
-        ---------github :-NOOB-MUKESH -----
-        ---------telegram : @itz_legend_coder-----
+        ---------github :-sahilsi552 -----
+        ---------telegram : @sahil_kzx-----
         """
         distance=(great_circle(x,y).miles)
 
@@ -83,4 +83,4 @@ sᴇɴᴅs ʏᴏᴜ ᴛʜᴇ ɢᴘs ʟᴏᴄᴀᴛɪᴏɴ ᴏғ ᴛʜᴇ ɢɪᴠ
  ❍ /distance  to measure distance 
 """
 
-__mod_name__ = "Gᴘs 🛰️"
+__mod_name__ = "Gᴘs🛰️"
