@@ -180,4 +180,4 @@ dispatcher.add_handler(LOAD_HANDLER)
 dispatcher.add_handler(UNLOAD_HANDLER)
 dispatcher.add_handler(LISTMODULES_HANDLER)
 
-__mod_name__ = "ᴍᴏᴅᴜʟᴇs 🌀"
+__mod_name__ = "ᴍᴏᴅᴜʟᴇs🌀"
