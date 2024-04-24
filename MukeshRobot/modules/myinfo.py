@@ -77,5 +77,5 @@ async def callback_query_handler(event):
         await event.reply(f"{e}")
 
 
-__command_list__ = ["myinfo 🛰️"]
+__command_list__ = ["myinfo🛰️"]
 
