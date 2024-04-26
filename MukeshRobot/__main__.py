@@ -72,7 +72,7 @@ def get_readable_time(seconds: int) -> str:
 
 PM_START_TEXT = """ 
 
-Hɪ [🥀](https://graph.org/file/2dda62f78a2d0dfde2c23.jpg) Dᴇᴀʀ! {} Mʏ ɴᴀᴍᴇ ɪs {} 
+Hɪ [🥀](https://telegra.ph/file/430b740f73dc4bda23459.jpg) Dᴇᴀʀ! {} Mʏ ɴᴀᴍᴇ ɪs {} 
 
 I ᴄᴀɴ ʜᴇʟᴘ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘs ᴡɪᴛʜ ᴜsᴇғᴜʟ ғᴇᴀᴛᴜʀᴇs, ғᴇᴇʟ ғʀᴇᴇ ᴛᴏ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs!
 
@@ -86,14 +86,14 @@ buttons = [
         ),
     ],
     [
-        InlineKeyboardButton(text="ʜᴇʟᴘ❓", callback_data="help_back"),
+        InlineKeyboardButton(text="ʜᴇʟᴘ🔧", callback_data="help_back"),
         InlineKeyboardButton(
-                            text=" 🙆🏿 ɪɴғᴏ ", callback_data="mukesh_"
+                            text="ℹ️ɪɴғᴏ ", callback_data="mukesh_"
                         ),
     ],
     [
         InlineKeyboardButton(
-                            text="👨‍💻ᴅᴇᴠᴇʟᴏᴩᴇʀ", url=f"tg://user?id={OWNER_ID}"
+                            text="🧑‍💻ᴅᴇᴠᴇʟᴏᴩᴇʀ", url=f"tg://user?id={OWNER_ID}"
                         ),
         InlineKeyboardButton(text="ᴍᴜsɪᴄ 🎧",callback_data="Music_"),
     ],
@@ -1195,7 +1195,7 @@ def main():
                 caption=f"""
 ✨ㅤ{BOT_NAME} ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ.
 ━━━━━━━━━━━━━
-**ᴍᴀᴅᴇ ᴡɪᴛʜ ❤️ ʙʏ 𝐌ᴜᴋᴇsʜ**
+**ᴍᴀᴅᴇ ᴡɪᴛʜ ❤️ ʙʏ sahil**
 **ᴘʏᴛʜᴏɴ ᴠᴇʀsɪᴏɴ:** `{y()}`
 **ʟɪʙʀᴀʀʏ ᴠᴇʀsɪᴏɴ:** `{telever}`
 **ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ:** `{tlhver}`
