@@ -465,7 +465,7 @@ __help__ = """
  ❍ <sticker link > ᴄᴀɴ ʙᴇ `https://t.me/addstickers//<sticker>` ᴏʀ ᴊᴜsᴛ `<sticker>` ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴛʜᴇ sᴛɪᴄᴋᴇʀ ᴍᴇssᴀɢᴇ
 """
 
-__mod_name__ = "Sᴛɪᴄᴋᴇʀ 🕹️"
+__mod_name__ = "Sᴛɪᴄᴋᴇʀ🕹️"
 
 BLACKLIST_STICKER_HANDLER = DisableAbleCommandHandler(
     "blsticker", blackliststicker, admin_ok=True, run_async=True
