@@ -178,7 +178,7 @@ handlers = [
     (AFK_REPLY_HANDLER, AFK_REPLY_GROUP), 
 ]
 
-__mod_name__ = "Aꜰᴋ"
+__mod_name__ = "Aꜰᴋ🎹"
 __help__ = """
 ◌ /afk : ᴛʜɪs ᴡɪʟʟ sᴇᴛ ʏᴏᴜ ᴏғғʟɪɴᴇ.
 ◌ /afk [ʀᴇᴀsᴏɴ] : ᴛʜɪs ᴡɪʟʟ sᴇᴛ ʏᴏᴜ ᴏғғʟɪɴᴇ ᴡɪᴛʜ ᴀ ʀᴇᴀsᴏɴ.
