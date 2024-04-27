@@ -485,7 +485,7 @@ Tᴏ ᴅᴏ ᴛʜᴀᴛ, ғᴏʟʟᴏᴡ ᴛʜɪs ᴇᴀsʏ sᴛᴇᴘs:
     elif query.data == "tutorial_v_help":
         query.answer()
         query.message.reply_animation(
-            "https://te.legra.ph/file/bee5894fc60aa0faee9d8.mp4"
+            "https://graph.org/file/a71a4314a6a290d53c578.mp4"
         )
         query.message.edit_text(
             f"""Oᴋ, ᴡᴇʟʟ ᴅᴏɴᴇ!
