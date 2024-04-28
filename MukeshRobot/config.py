@@ -11,12 +11,10 @@ class Config(object):
     START_IMG = "https://telegra.ph/file/000625ad0b270aaea4ec6.jpg"
     EVENT_LOGS = (-1002050675293)  
     MONGO_DB_URI = "mongodb+srv://Mukesh01:mstboy@cluster0.8jwzl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-    # RECOMMENDED
+   
     DATABASE_URL = "postgres://iadhvjopgtomul:4883b7456515dffbbea0b9e626bd06dbd33cdabfaaa6d1f5117d08c94ff777d6@ec2-18-206-103-49.compute-1.amazonaws.com:5432/dfh9hnujmva3kj"  
-    CASH_API_KEY = (
-        "" # get your api from 
-    )
-    TIME_API_KEY = ""
+    CASH_API_KEY = (TCOVLTKUMVPOCWXO)
+    TIME_API_KEY = "MSATXGNOJ0GQ"
     
     # Get your API key from https://timezonedb.com/api
 
