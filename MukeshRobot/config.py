@@ -13,7 +13,9 @@ class Config(object):
     MONGO_DB_URI = "mongodb+srv://Mukesh01:mstboy@cluster0.8jwzl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
     # RECOMMENDED
     DATABASE_URL = "postgres://iadhvjopgtomul:4883b7456515dffbbea0b9e626bd06dbd33cdabfaaa6d1f5117d08c94ff777d6@ec2-18-206-103-49.compute-1.amazonaws.com:5432/dfh9hnujmva3kj"  
-    CASH_API_KEY = ()
+    CASH_API_KEY = (
+        "" # get your api from 
+    )
     TIME_API_KEY = ""
     
     # Get your API key from https://timezonedb.com/api
