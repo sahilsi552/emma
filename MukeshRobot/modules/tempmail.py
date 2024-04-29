@@ -99,7 +99,6 @@ async def mailbox(client,message):
             os.remove(dlattach)
 
 __mod_name__ = "TᴇᴍᴘMᴀɪʟ📩"
-
 __help__ = """
 ──「 Hᴇʟᴘ ᴏғ TᴇᴍᴘMᴀɪʟ 📩 」── 
 
