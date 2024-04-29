@@ -98,6 +98,8 @@ async def mailbox(client,message):
             await message.edit_message_text(mailbox_vieww,reply_markup=buttons)
             os.remove(dlattach)
 
+__mod_name__ = "TᴇᴍᴘMᴀɪʟ📩"
+
 __help__ = """
 ──「 Hᴇʟᴘ ᴏғ TᴇᴍᴘMᴀɪʟ 📩 」── 
 
@@ -105,4 +107,3 @@ Yᴏᴜ ᴄᴀɴ ɢᴇɴᴇʀᴀᴛᴇ Tᴇᴍᴘ-Mᴀɪʟ ғʀᴏᴍ Bᴏᴀ H�
  ❍ /tempmail : Tᴏ ɢᴇᴛ Rᴀɴᴅᴏᴍ Tᴇᴍᴘ-Mᴀɪʟ.
  """
 
-__mod_name__ = "TᴇᴍᴘMᴀɪʟ📩"
