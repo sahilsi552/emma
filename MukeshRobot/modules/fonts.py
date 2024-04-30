@@ -6,6 +6,7 @@ from MukeshRobot import pbot
 
 @pbot.on_message(filters.command(["font", "fonts"]))
 async def style_buttons(c, m, cb=False):
+    text = m.text.split(' ',1)[1]
     buttons = [
         [
             InlineKeyboardButton("𝚃𝚢𝚙𝚎𝚠𝚛𝚒𝚝𝚎𝚛", callback_data="style+typewriter"),
@@ -107,89 +108,89 @@ async def nxt(c, m):
 async def style(c, m):
     await m.answer()
     cmd,style = m.data.split('+')
-    if style == "typewriter":
-        cls = Fonts.typewriter
-    if style == "outline":
-        cls = Fonts.outline
-    if style == "serif":
-        cls = Fonts.serief
-    if style == "bold_cool":
-        cls = Fonts.bold_cool
-    if style == "cool":
-        cls = Fonts.cool
-    if style == "small_cap":
-        cls = Fonts.smallcap
-    if style == "script":
-        cls = Fonts.script
-    if style == "script_bolt":
-        cls = Fonts.bold_script
-    if style == "tiny":
-        cls = Fonts.tiny
-    if style == "comic":
-        cls = Fonts.comic
-    if style == "sans":
-        cls = Fonts.san
-    if style == "slant_sans":
-        cls = Fonts.slant_san
-    if style == "slant":
-        cls = Fonts.slant
-    if style == "sim":
-        cls = Fonts.sim
-    if style == "circles":
-        cls = Fonts.circles
-    if style == "circle_dark":
-        cls = Fonts.dark_circle
-    if style == "gothic":
-        cls = Fonts.gothic
-    if style == "gothic_bolt":
-        cls = Fonts.bold_gothic
-    if style == "cloud":
-        cls = Fonts.cloud
-    if style == "happy":
-        cls = Fonts.happy
-    if style == "sad":
-        cls = Fonts.sad
-    if style == "special":
-        cls = Fonts.special
-    if style == "squares":
-        cls = Fonts.square
-    if style == "squares_bold":
-        cls = Fonts.dark_square
     if style == "andalucia":
         cls = Fonts.andalucia
-    if style == "manga":
-        cls = Fonts.manga
-    if style == "stinky":
-        cls = Fonts.stinky
-    if style == "bubbles":
-        cls = Fonts.bubbles
-    if style == "underline":
-        cls = Fonts.underline
-    if style == "ladybug":
-        cls = Fonts.ladybug
-    if style == "rays":
-        cls = Fonts.rays
-    if style == "birds":
-        cls = Fonts.birds
-    if style == "slash":
-        cls = Fonts.slash
-    if style == "stop":
-        cls = Fonts.stop
-    if style == "skyline":
-        cls = Fonts.skyline
-    if style == "arrows":
+    elif style == "arrows":
         cls = Fonts.arrows
-    if style == "qvnes":
-        cls = Fonts.rvnes
-    if style == "strike":
-        cls = Fonts.strike
-    if style == "frozen":
+    elif style == "birds":
+        cls = Fonts.birds
+    elif style == "bold_cool":
+        cls = Fonts.bold_cool
+    elif style == "bubbles":
+        cls = Fonts.bubbles
+    elif style == "circle_dark":
+        cls = Fonts.dark_circle
+    elif style == "circles":
+        cls = Fonts.circles
+    elif style == "cloud":
+        cls = Fonts.cloud
+    elif style == "comic":
+        cls = Fonts.comic
+    elif style == "cool":
+        cls = Fonts.cool
+    elif style == "frozen":
         cls = Fonts.frozen
+    elif style == "gothic":
+        cls = Fonts.gothic
+    elif style == "gothic_bolt":
+        cls = Fonts.bold_gothic
+    elif style == "happy":
+        cls = Fonts.happy
+    elif style == "ladybug":
+        cls = Fonts.ladybug
+    elif style == "manga":
+        cls = Fonts.manga
+    elif style == "outline":
+        cls = Fonts.outline
+    elif style == "qvnes":
+        cls = Fonts.rvnes
+    elif style == "rays":
+        cls = Fonts.rays
+    elif style == "sad":
+        cls = Fonts.sad
+    elif style == "sans":
+        cls = Fonts.san
+    elif style == "script":
+        cls = Fonts.script
+    elif style == "script_bolt":
+        cls = Fonts.bold_script
+    elif style == "serif":
+        cls = Fonts.serief
+    elif style == "sim":
+        cls = Fonts.sim
+    elif style == "skyline":
+        cls = Fonts.skyline
+    elif style == "slant":
+        cls = Fonts.slant
+    elif style == "slant_sans":
+        cls = Fonts.slant_san
+    elif style == "slash":
+        cls = Fonts.slash
+    elif style == "small_cap":
+        cls = Fonts.smallcap
+    elif style == "special":
+        cls = Fonts.special
+    elif style == "squares":
+        cls = Fonts.square
+    elif style == "squares_bold":
+        cls = Fonts.dark_square
+    elif style == "stinky":
+        cls = Fonts.stinky
+    elif style == "stop":
+        cls = Fonts.stop
+    elif style == "strike":
+        cls = Fonts.strike
+    elif style == "tiny":
+        cls = Fonts.tiny
+    elif style == "typewriter":
+        cls = Fonts.typewriter
+    elif style == "underline":
+        cls = Fonts.underline
     #text = m.text.split(' ',1)[1]    
     new_text = cls(m.message.reply_to_message.text.split(" ",1)[1])
     try:
         await m.message.edit_text(new_text, reply_markup=m.message.reply_markup)
-    except:
+    except Exception:
         pass
 
 
@@ -198,4 +199,4 @@ __help__ = """
  ❍ /fonts <text> *:* ᴄᴏɴᴠᴇʀᴛs sɪᴍᴩʟᴇ ᴛᴇxᴛ ᴛᴏ ʙᴇᴀᴜᴛɪғᴜʟ ᴛᴇxᴛ ʙʏ ᴄʜᴀɴɢɪɴɢ ɪᴛ's ғᴏɴᴛ.
  """
 
-__mod_name__ = "Fᴏɴᴛ✍️"
+__mod_name__ = "Fᴏɴᴛ🫕"
