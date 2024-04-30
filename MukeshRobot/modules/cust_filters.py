@@ -605,7 +605,7 @@ __help__ = """
  ʀᴇᴘʟʏ 2
  %%%
  ʀᴇᴘʟʏ 3`
- ❍ /stop  <ғɪʟᴛᴇʀ ᴋᴇʏᴡᴏʀᴅ>*:* sᴛᴏᴘ ᴛʜᴀᴛ ғɪʟᴛᴇʀ.
+ ❍ /rmfilter  <ғɪʟᴛᴇʀ ᴋᴇʏᴡᴏʀᴅ>*:* sᴛᴏᴘ ᴛʜᴀᴛ ғɪʟᴛᴇʀ.
 
 *ᴄʜᴀᴛ ᴄʀᴇᴀᴛᴏʀ ᴏɴʟʏ:*
  ❍ /removeallfilters*:* ʀᴇᴍᴏᴠᴇ ᴀʟʟ ᴄʜᴀᴛ ғɪʟᴛᴇʀs ᴀᴛ ᴏɴᴄᴇ.
@@ -618,7 +618,7 @@ __help__ = """
 __mod_name__ = "Fɪʟᴛᴇʀs📂"
 
 FILTER_HANDLER = CommandHandler("filter", filters, run_async=True)
-STOP_HANDLER = CommandHandler("stop", stop_filter, run_async=True)
+STOP_HANDLER = CommandHandler("rmfilter", stop_filter, run_async=True)
 RMALLFILTER_HANDLER = CommandHandler(
     "removeallfilters", rmall_filters, filters=Filters.chat_type.groups, run_async=True
 )
