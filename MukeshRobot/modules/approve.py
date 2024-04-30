@@ -10,7 +10,7 @@ from MukeshRobot import DRAGONS, dispatcher
 from MukeshRobot.modules.disable import DisableAbleCommandHandler
 from MukeshRobot.modules.helper_funcs.chat_status import user_admin
 from MukeshRobot.modules.helper_funcs.extraction import extract_user
-from MukeshRobpt.modules.log_channel import loggable
+from MukeshRobot.modules.log_channel import loggable
 
 
 @loggable
