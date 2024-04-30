@@ -9,18 +9,18 @@ import os
 buttons=InlineKeyboardMarkup(
                              [
                              [
-            InlineKeyboardButton('Gᴇɴᴇʀᴀᴛᴇ ᴛᴇᴍᴘᴍᴀɪʟ', callback_data='generate'),
+            InlineKeyboardButton('Generate 📥', callback_data='generate'),
                              ],
                              [
-            InlineKeyboardButton('ʀᴇғʀᴇsʜ', callback_data='refresh'),
-            InlineKeyboardButton('ᴄʟᴏsᴇ', callback_data='close')
+            InlineKeyboardButton('Refresh 🔄', callback_data='refresh'),
+            InlineKeyboardButton('Close 🚫', callback_data='close')
                    ] 
                              ])
 
 msg_buttons=InlineKeyboardMarkup(
                              [
                              [
-            InlineKeyboardButton('ᴠɪᴇᴡ ᴍᴇssᴀɢᴇ', callback_data='view_msg'),
+            InlineKeyboardButton('View Message👁️‍🗨️', callback_data='view_msg'),
             InlineKeyboardButton('ᴄʟᴏsᴇ', callback_data='close')
                    ] 
                              ])
@@ -98,7 +98,7 @@ async def mailbox(client,message):
             await message.edit_message_text(mailbox_vieww,reply_markup=buttons)
             os.remove(dlattach)
 
-__mod_name__ = "TᴇᴍᴘMᴀɪʟ📩"
+__mod_name__ = "Tempmail📩"
 __help__ = """
 ──「 Hᴇʟᴘ ᴏғ TᴇᴍᴘMᴀɪʟ 📩 」── 
 
