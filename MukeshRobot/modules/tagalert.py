@@ -263,7 +263,8 @@ async def mentioned_alert(client, message):
         return message.continue_propagation()
 
 
-__mod_name__ = "Tᴀɢᴀʟᴇʀᴛ🔔"
+__mod_name__ = "Tagalert🔔"
+
 __help__ = """
 ──「 Help of Tagalert ‼️ 」── 
 
