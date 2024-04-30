@@ -32,4 +32,4 @@ async def figlet_handler(Client, query: CallbackQuery):
 __mod_name__ = "Fɪɢʟᴇᴛ🫥" 
 __help__="""
 ❍ /figlet*:* ᴍᴀᴋᴇs ғɪɢʟᴇᴛ ᴏғ ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ
-Example:\n\n`/figlet Mukesh`"""
+Example:\n\n`/figlet sahil`"""
