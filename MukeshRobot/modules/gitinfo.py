@@ -31,8 +31,8 @@ async def github(_, message):
                 following = result["following"]
                 global Mukesh
                 Mukesh = [[
-            InlineKeyboardButton(text="ᴘʀᴏғɪʟᴇ ʟɪɴᴋ", url=url),
-            InlineKeyboardButton("Cʟᴏsᴇ",callback_data="close_reply")
+            InlineKeyboardButton(text="ᴘʀᴏғɪʟᴇ ʟɪɴᴋ🧑‍💻", url=url),
+            InlineKeyboardButton("Cʟᴏsᴇ🗑️",callback_data="close_reply")
             ]]     
                 caption = f"""**Iɴғᴏ Oғ {name}**
 **ᴜsᴇʀɴᴀᴍᴇ :** `{username}`
