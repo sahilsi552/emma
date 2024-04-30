@@ -5,7 +5,7 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CallbackQueryHandler
 from telegram.utils.helpers import mention_html
 
-import Exon.modules.sql.approve_sql as sql
+import MukeshRobot.modules.sql.approve_sql as sql
 from MukeshRobot import DRAGONS, dispatcher
 from MukeshRobot.modules.disable import DisableAbleCommandHandler
 from MukeshRobot.modules.helper_funcs.chat_status import user_admin
