@@ -97,7 +97,7 @@ async def cancel_spam(event):
     return await event.respond("sᴛᴏᴘᴘᴇᴅ ᴍᴇɴᴛɪᴏɴ.__")
 
 
-__mod_name__ = "Tag-command🔧"
+__mod_name__ = "Tagall🔧"
 __help__ = """
 ──「  ᴏɴʟʏ ғᴏʀ ᴀᴅᴍɪɴs 」──
 
