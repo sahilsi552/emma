@@ -31,13 +31,14 @@ ELEVATED_USERS_FILE = os.path.join(os.getcwd(), "MukeshRobot/elevated_users.json
 def check_user_id(user_id: int, context: CallbackContext) -> Optional[str]:
     bot = context.bot
     if not user_id:
-        return "That...is a chat! baka ka omae?"
+        reply = "That...is a chat! baka ka omae?"
 
     elif user_id == bot.id:
-        return "This does not work that way."
+        reply = "This does not work that way."
 
     else:
-        return None
+        reply = None
+    return reply
 
 
 @dev_plus
@@ -51,7 +52,8 @@ def addsudo(update: Update, context: CallbackContext) -> str:
     user_member = bot.getChat(user_id)
     rt = ""
 
-    if reply := check_user_id(user_id, bot):
+    reply = check_user_id(user_id, bot)
+    if reply:
         message.reply_text(reply)
         return ""
 
@@ -79,7 +81,10 @@ def addsudo(update: Update, context: CallbackContext) -> str:
         json.dump(data, outfile, indent=4)
 
     update.effective_message.reply_text(
-        f"{rt}\nSuccessfully set Disaster level of {user_member.first_name} to Dragon!"
+        rt
+        + "\nSuccessfully set Disaster level of {} to Dragon!".format(
+            user_member.first_name
+        )
     )
 
     log_message = (
@@ -89,7 +94,7 @@ def addsudo(update: Update, context: CallbackContext) -> str:
     )
 
     if chat.type != "private":
-        log_message = f"<b>{html.escape(chat.title)}:</b>\n{log_message}"
+        log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
     return log_message
 
@@ -108,7 +113,8 @@ def addsupport(
     user_member = bot.getChat(user_id)
     rt = ""
 
-    if reply := check_user_id(user_id, bot):
+    reply = check_user_id(user_id, bot)
+    if reply:
         message.reply_text(reply)
         return ""
 
@@ -136,7 +142,7 @@ def addsupport(
         json.dump(data, outfile, indent=4)
 
     update.effective_message.reply_text(
-        f"{rt}\n{user_member.first_name} was added as a Demon Disaster!"
+        rt + f"\n{user_member.first_name} was added as a Demon Disaster!"
     )
 
     log_message = (
@@ -146,7 +152,7 @@ def addsupport(
     )
 
     if chat.type != "private":
-        log_message = f"<b>{html.escape(chat.title)}:</b>\n{log_message}"
+        log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
     return log_message
 
@@ -162,7 +168,8 @@ def addwhitelist(update: Update, context: CallbackContext) -> str:
     user_member = bot.getChat(user_id)
     rt = ""
 
-    if reply := check_user_id(user_id, bot):
+    reply = check_user_id(user_id, bot)
+    if reply:
         message.reply_text(reply)
         return ""
 
@@ -190,7 +197,7 @@ def addwhitelist(update: Update, context: CallbackContext) -> str:
         json.dump(data, outfile, indent=4)
 
     update.effective_message.reply_text(
-        f"{rt}\nSuccessfully promoted {user_member.first_name} to a Wolf Disaster!"
+        rt + f"\nSuccessfully promoted {user_member.first_name} to a Wolf Disaster!"
     )
 
     log_message = (
@@ -200,7 +207,7 @@ def addwhitelist(update: Update, context: CallbackContext) -> str:
     )
 
     if chat.type != "private":
-        log_message = f"<b>{html.escape(chat.title)}:</b>\n{log_message}"
+        log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
     return log_message
 
@@ -216,7 +223,8 @@ def addtiger(update: Update, context: CallbackContext) -> str:
     user_member = bot.getChat(user_id)
     rt = ""
 
-    if reply := check_user_id(user_id, bot):
+    reply = check_user_id(user_id, bot)
+    if reply:
         message.reply_text(reply)
         return ""
 
@@ -249,7 +257,7 @@ def addtiger(update: Update, context: CallbackContext) -> str:
         json.dump(data, outfile, indent=4)
 
     update.effective_message.reply_text(
-        f"{rt}\nSuccessfully promoted {user_member.first_name} to a Tiger Disaster!"
+        rt + f"\nSuccessfully promoted {user_member.first_name} to a Tiger Disaster!"
     )
 
     log_message = (
@@ -259,7 +267,7 @@ def addtiger(update: Update, context: CallbackContext) -> str:
     )
 
     if chat.type != "private":
-        log_message = f"<b>{html.escape(chat.title)}:</b>\n{log_message}"
+        log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
     return log_message
 
@@ -274,7 +282,8 @@ def removesudo(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     user_member = bot.getChat(user_id)
 
-    if reply := check_user_id(user_id, bot):
+    reply = check_user_id(user_id, bot)
+    if reply:
         message.reply_text(reply)
         return ""
 
@@ -296,7 +305,7 @@ def removesudo(update: Update, context: CallbackContext) -> str:
         )
 
         if chat.type != "private":
-            log_message = f"<b>{html.escape(chat.title)}:</b>\n{log_message}"
+            log_message = "<b>{}:</b>\n".format(html.escape(chat.title)) + log_message
 
         return log_message
 
@@ -315,7 +324,8 @@ def removesupport(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     user_member = bot.getChat(user_id)
 
-    if reply := check_user_id(user_id, bot):
+    reply = check_user_id(user_id, bot)
+    if reply:
         message.reply_text(reply)
         return ""
 
@@ -337,7 +347,7 @@ def removesupport(update: Update, context: CallbackContext) -> str:
         )
 
         if chat.type != "private":
-            log_message = f"<b>{html.escape(chat.title)}:</b>\n{log_message}"
+            log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
         return log_message
 
@@ -356,7 +366,8 @@ def removewhitelist(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     user_member = bot.getChat(user_id)
 
-    if reply := check_user_id(user_id, bot):
+    reply = check_user_id(user_id, bot)
+    if reply:
         message.reply_text(reply)
         return ""
 
@@ -378,7 +389,7 @@ def removewhitelist(update: Update, context: CallbackContext) -> str:
         )
 
         if chat.type != "private":
-            log_message = f"<b>{html.escape(chat.title)}:</b>\n{log_message}"
+            log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
         return log_message
     else:
@@ -396,7 +407,8 @@ def removetiger(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     user_member = bot.getChat(user_id)
 
-    if reply := check_user_id(user_id, bot):
+    reply = check_user_id(user_id, bot)
+    if reply:
         message.reply_text(reply)
         return ""
 
@@ -418,7 +430,7 @@ def removetiger(update: Update, context: CallbackContext) -> str:
         )
 
         if chat.type != "private":
-            log_message = f"<b>{html.escape(chat.title)}:</b>\n{log_message}"
+            log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
         return log_message
     else:
@@ -539,7 +551,12 @@ __help__ = f"""
  ❍ /broadcastall *:* ʙʀᴏᴀᴅᴄᴀsᴛs ᴇᴠᴇʀʏᴡʜᴇʀᴇ
  ❍ broadcastusers *:* ʙʀᴏᴀᴅᴄᴀsᴛs ᴛᴏᴏ ᴀʟʟ ᴜsᴇʀs
  ❍ /broadcastgroups *:* ʙʀᴏᴀᴅᴄᴀsᴛs ᴛᴏᴏ ᴀʟʟ ɢʀᴏᴜᴘs
- """
+
+
+
+`⚠️ ʀᴇᴀᴅ ғʀᴏᴍ ᴛᴏᴘ`
+ᴠɪsɪᴛ [sᴜᴘᴘᴏʀᴛ ᴄʜᴀᴛ]("https://t.me{SUPPORT_CHAT}") ғᴏʀ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ.
+"""
 
 SUDO_HANDLER = CommandHandler("addsudo", addsudo, run_async=True)
 SUPPORT_HANDLER = CommandHandler(("addsupport", "adddemon"), addsupport, run_async=True)
@@ -577,7 +594,7 @@ dispatcher.add_handler(SUPPORTLIST_HANDLER)
 dispatcher.add_handler(SUDOLIST_HANDLER)
 dispatcher.add_handler(DEVLIST_HANDLER)
 
-__mod_name__ = "Dᴇᴠꜱ💜"
+__mod_name__ = "Dᴇᴠꜱ🗽"
 __handlers__ = [
     SUDO_HANDLER,
     SUPPORT_HANDLER,
@@ -592,4 +609,4 @@ __handlers__ = [
     SUPPORTLIST_HANDLER,
     SUDOLIST_HANDLER,
     DEVLIST_HANDLER,
-]
+        ]
