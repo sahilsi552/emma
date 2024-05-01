@@ -58,10 +58,10 @@ def addsudo(update: Update, context: CallbackContext) -> str:
         return ""
 
     import os
-    update.effective_message.reply_text(str(data["sudos"].append(user_id)))
     if not os.path.exists(ELEVATED_USERS_FILE):
       with open(ELEVATED_USERS_FILE, 'w') as f:
-         f.write('{}')
+         data = {"sudos" : [], "supports": [], "whitelists":[]}
+         f.write(data)
     
     with open(ELEVATED_USERS_FILE, "r") as infile:
         data = json.load(infile)
