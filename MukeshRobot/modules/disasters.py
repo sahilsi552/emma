@@ -39,9 +39,9 @@ def addsudo(update: Update, context: CallbackContext) -> str:
         return ""
 
     import os
-if not os.path.exists(ELEVATED_USERS_FILE):
-  with open(ELEVATED_USERS_FILE, 'w') as f:
-   f.write("")
+    if not os.path.exists(ELEVATED_USERS_FILE):
+      with open(ELEVATED_USERS_FILE, 'w') as f:
+          f.write("")
     
     with open(ELEVATED_USERS_FILE, "r") as infile:
         data = json.load(infile)
