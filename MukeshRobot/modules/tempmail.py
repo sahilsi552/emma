@@ -1,4 +1,3 @@
-#DevanshXBots.t.me
 from pyrogram import *
 import requests as re
 from MukeshRobot import pbot, config
@@ -98,7 +97,7 @@ async def mailbox(client,message):
             await message.edit_message_text(mailbox_vieww,reply_markup=buttons)
             os.remove(dlattach)
 
-__mod_name__ = "Tempmail📩"
+__mod_name__ = "T-mail📩"
 
 __help__ = """
 ──「 Hᴇʟᴘ ᴏғ TᴇᴍᴘMᴀɪʟ 📩 」── 
