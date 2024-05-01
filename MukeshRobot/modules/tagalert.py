@@ -261,15 +261,3 @@ async def mentioned_alert(client, message):
         message.continue_propagation()
     except:
         return message.continue_propagation()
-
-
-__mod_name__ = "Tagalert🔔"
-
-__help__ = """
-──「 Help of Tagalert ‼️ 」── 
-
-❍ /tagalert <on/off> 'to Enable Notifications For Tags Where Patricia Is
-
-Example:
-If you are mentioned in a group Daisy will tell you who mentioned you, message that you are tagged in and which group is that'
-"""
