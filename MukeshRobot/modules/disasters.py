@@ -60,7 +60,7 @@ def addsudo(update: Update, context: CallbackContext) -> str:
     import os
     if not os.path.exists(ELEVATED_USERS_FILE):
       with open(ELEVATED_USERS_FILE, 'w') as f:
-         data = {"sudos" : [], "supports": [], "whitelists":[]}
+         data = '{"sudos" : [], "supports": [], "whitelists":[]}'
          f.write(data)
     
     with open(ELEVATED_USERS_FILE, "r") as infile:
