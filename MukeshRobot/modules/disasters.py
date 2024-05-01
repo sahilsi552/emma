@@ -520,13 +520,8 @@ __help__ = f"""
 *ɴᴏᴛᴇ:* ᴛʜɪs sᴜᴘᴘᴏʀᴛs ʙᴀsɪᴄ ᴍᴀʀᴋᴅᴏᴡɴ
  ❍ /broadcastall *:* ʙʀᴏᴀᴅᴄᴀsᴛs ᴇᴠᴇʀʏᴡʜᴇʀᴇ
  ❍ broadcastusers *:* ʙʀᴏᴀᴅᴄᴀsᴛs ᴛᴏᴏ ᴀʟʟ ᴜsᴇʀs
- ❍ /broadcastgroups *:* ʙʀᴏᴀᴅᴄᴀsᴛs ᴛᴏᴏ ᴀʟʟ ɢʀᴏᴜᴘs
-
-
-
-`⚠️ ʀᴇᴀᴅ ғʀᴏᴍ ᴛᴏᴘ`
-ᴠɪsɪᴛ [sᴜᴘᴘᴏʀᴛ ᴄʜᴀᴛ]("https://t.me{SUPPORT_CHAT}") ғᴏʀ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ.
-"""
+ ❍ /broadcastgroups *:* ʙʀᴏᴀᴅᴄᴀsᴛs ᴛᴏᴏ ᴀʟʟ ɢʀᴏup
+ """
 
 SUDO_HANDLER = CommandHandler(("addsudo", "addshadowslayers"), addsudo, run_async=True)
 SUPPORT_HANDLER = CommandHandler(
