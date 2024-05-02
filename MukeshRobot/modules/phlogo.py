@@ -13,7 +13,7 @@ async def ph(event):
 	query = event.pattern_match.group(1)
 	await event.message.delete()
 	if query == "":
-		await event.reply("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ʙʀᴜʜ, ᴇ.ɢ.: `/phlogo Razer Bot`")
+		await event.reply("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ʙʀᴜʜ, ᴇ.ɢ.: `/phlogo porn hub`")
 		return
 	try:
 		p = query.split(" ", 1)[0]
@@ -42,7 +42,7 @@ async def ph(event):
 		p = query.split(" ", 1)[0]
 		h = query.split(" ", 1)[1]
 	except:
-		await event.reply("sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ, ᴛʀʏ ɢɪᴠɪɴɢ ᴛᴡᴏ ᴡᴏʀᴅs. ᴇ.ɢ.: `/phst Razer Bot`")
+		await event.reply("sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ, ᴛʀʏ ɢɪᴠɪɴɢ ᴛᴡᴏ ᴡᴏʀᴅs. ᴇ.ɢ.: `/phst porn hub`")
 		return
 	result = generate(f"{p}",f"{h}")
 	stc = "ph.webp"
