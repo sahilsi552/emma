@@ -57,3 +57,4 @@ faker
 pyfiglet
 MukeshAPI
 phlogo
+pillow
