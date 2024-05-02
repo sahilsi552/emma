@@ -56,3 +56,4 @@ pyshorteners
 faker
 pyfiglet
 MukeshAPI
+phlogo
