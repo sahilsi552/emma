@@ -16,7 +16,7 @@ async def ph(event):
         await event.reply("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ʙʀᴜʜ, ᴇ.ɢ.: `/phlogo porn hub`")
         return
     try:
-        input_str = "".join(e.text.split(maxsplit=1)[1:])
+        input_str = "".join(event.text.split(maxsplit=1)[1:])
         p = query.split(" ", 1)[0]
         h = query.split(" ", 1)[1]
     except:
