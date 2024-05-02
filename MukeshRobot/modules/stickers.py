@@ -826,7 +826,7 @@ async def handler(event):
 
         return
 
-    file = await bot.download_media(reply_message)
+    file = await event.download_media(reply_message)
 
     msg = await event.reply("```ᴍᴇᴍɪғʏɪɴɢ ᴛʜɪs ɪᴍᴀɢᴇ! 😉 ```")
 
