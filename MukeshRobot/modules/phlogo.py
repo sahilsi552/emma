@@ -2,7 +2,13 @@ import os
 from MukeshRobot import telethn as tbot
 from MukeshRobot.events import register
 from telethon import events
-from phlogo import generate
+from PIL import Image, ImageDraw, ImageFont
+
+# generate function
+def generate(text1, text2):
+    ImageDraw.Draw(Image.new("RGBA",(font.getsize(text2)[0]+20,140),color=(240, 152, 0))).text((10,int((Image.new("RGBA",(font.getsize(text2)[0]+20,140),color=(240, 152, 0)).height-font.getsize(text2)[1])/2)-10),text2, (0,0,0),font=font)
+    return Gabung([Image.new("RGBA",(font.getsize(text2)[0]+20,140),color=(240, 152, 0)), text1])
+
 
 @register(pattern="^[!/.]phlogo ?(.*)")
 async def ph(event):
