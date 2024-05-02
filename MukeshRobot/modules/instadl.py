@@ -63,3 +63,7 @@ async def instadl_command_handler(update: Update, context: ContextTypes.DEFAULT_
 function(
     CommandHandler(["ig", "instagram", "insta", "instadl"], instadl_command_handler)
 )
+__mod_name__ = "Download📥"
+__help__ = """
+/ig 
+"""
