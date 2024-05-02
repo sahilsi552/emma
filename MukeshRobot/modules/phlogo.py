@@ -17,8 +17,8 @@ async def ph(event):
         return
     try:
         input_str = "".join(e.text.split(maxsplit=1)[1:])
-        p = input_str.split(" ", 1)[0]
-        h = input_str.split(" ", 1)[1]
+        p = query.split(" ", 1)[0]
+        h = query.split(" ", 1)[1]
     except:
         await event.reply("sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ, ᴛʀʏ ɢɪᴠɪɴɢ ᴛᴡᴏ ᴡᴏʀᴅs. ᴇ.ɢ.: `/phlogo porn hub`")
     return
@@ -41,8 +41,8 @@ async def ph(event):
         return
     try:
         input_str = "".join(e.text.split(maxsplit=1)[1:])
-        p = input_str.split(" ", 1)[0]
-        h = input_str.split(" ", 1)[1]
+        p = query.split(" ", 1)[0]
+        h = query.split(" ", 1)[1]
     except:
         await event.reply("sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ, ᴛʀʏ ɢɪᴠɪɴɢ ᴛᴡᴏ ᴡᴏʀᴅs. ᴇ.ɢ.: `/phst porn hub`")
         return
