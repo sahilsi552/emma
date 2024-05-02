@@ -2,11 +2,7 @@ import os
 from MukeshRobot import telethn as tbot
 from MukeshRobot.events import register
 from telethon import events
-try:
-	from phlogo import generate
-except ModuleNotFoundError:
-	os.system("pip install phlogo")
-	from phlogo import generate
+from phlogo import generate
 
 @register(pattern="^[!/.]phlogo ?(.*)")
 async def ph(event):
