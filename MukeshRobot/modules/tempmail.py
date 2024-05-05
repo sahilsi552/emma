@@ -97,7 +97,7 @@ async def mailbox(client,message):
             await message.edit_message_text(mailbox_vieww,reply_markup=buttons)
             os.remove(dlattach)
 
-__mod_name__ = "T-mail📩"
+__mod_name__ = "Temp-mail📩"
 
 __help__ = """
 ──「 Hᴇʟᴘ ᴏғ TᴇᴍᴘMᴀɪʟ 📩 」── 
