@@ -1,28 +1,55 @@
-from MukeshRobot import telethn as tbot
-import os
 import re
+
 import bs4
 import requests
 from telethon import types
 from telethon.tl import functions
+
+from MukeshRobot import tbot
 from MukeshRobot.events import register
 
 langi = "en"
 
 
+async def is_register_admin(chat, user):
+    if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
+
+        return isinstance(
+            (
+                await tbot(functions.channels.GetParticipantRequest(chat, user))
+            ).participant,
+            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
+        )
+    if isinstance(chat, types.InputPeerChat):
+
+        ui = await tbot.get_peer_id(user)
+        ps = (
+            await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
+        ).full_chat.participants.participants
+        return isinstance(
+            next((p for p in ps if p.user_id == ui), None),
+            (types.ChatParticipantAdmin, types.ChatParticipantCreator),
+        )
+    return None
+
+
 @register(pattern="^/imdb (.*)")
 async def imdb(e):
-    if e.fwd_from:
+    if e.is_group and not (await is_register_admin(e.input_chat, e.message.sender_id)):
+        await event.reply(
+            " You are not admin. You can't use this command.. But you can use in my pm"
+        )
         return
     try:
         movie_name = e.pattern_match.group(1)
         remove_space = movie_name.split(" ")
         final_name = "+".join(remove_space)
         page = requests.get(
-            "https://www.imdb.com/find?ref_=nv_sr_fn&q=" + final_name + "&s=all"
+            f"https://www.imdb.com/find?ref_=nv_sr_fn&q={final_name}&s=all"
         )
+
         str(page.status_code)
-        soup = bs4.BeautifulSoup(page.content, "html.parser")
+        soup = bs4.BeautifulSoup(page.content, "lxml")
         odds = soup.findAll("tr", "odd")
         mov_title = odds[0].findNext("td").findNext("td").text
         mov_link = (
@@ -40,32 +67,25 @@ async def imdb(e):
         else:
             mov_details = ""
         credits = soup.findAll("div", "credit_summary_item")
+        director = credits[0].a.text
         if len(credits) == 1:
-            director = credits[0].a.text
             writer = "Not available"
             stars = "Not available"
         elif len(credits) > 2:
-            director = credits[0].a.text
             writer = credits[1].a.text
-            actors = []
-            for x in credits[2].findAll("a"):
-                actors.append(x.text)
+            actors = [x.text for x in credits[2].findAll("a")]
             actors.pop()
-            stars = actors[0] + "," + actors[1] + "," + actors[2]
+            stars = f"{actors[0]},{actors[1]},{actors[2]}"
         else:
-            director = credits[0].a.text
             writer = "Not available"
-            actors = []
-            for x in credits[1].findAll("a"):
-                actors.append(x.text)
+            actors = [x.text for x in credits[1].findAll("a")]
             actors.pop()
-            stars = actors[0] + "," + actors[1] + "," + actors[2]
+            stars = f"{actors[0]},{actors[1]},{actors[2]}"
         if soup.find("div", "inline canwrap"):
             story_line = soup.find("div", "inline canwrap").findAll("p")[0].text
         else:
             story_line = "Not available"
-        info = soup.findAll("div", "txt-block")
-        if info:
+        if info := soup.findAll("div", "txt-block"):
             mov_country = []
             mov_language = []
             for node in info:
@@ -81,36 +101,71 @@ async def imdb(e):
         else:
             mov_rating = "Not available"
         await e.reply(
-            "<a href=" + poster + ">&#8203;</a>"
-            "<b>Title : </b><code>"
-            + mov_title
-            + "</code>\n<code>"
-            + mov_details
-            + "</code>\n<b>Rating : </b><code>"
-            + mov_rating
-            + "</code>\n<b>Country : </b><code>"
-            + mov_country[0]
-            + "</code>\n<b>Language : </b><code>"
-            + mov_language[0]
-            + "</code>\n<b>Director : </b><code>"
-            + director
-            + "</code>\n<b>Writer : </b><code>"
-            + writer
-            + "</code>\n<b>Stars : </b><code>"
-            + stars
-            + "</code>\n<b>IMDB Url : </b>"
-            + mov_link
-            + "\n<b>Story Line : </b>"
-            + story_line,
+            (
+                (
+                    (
+                        (
+                            (
+                                (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    (
+                                                        (
+                                                            (
+                                                                (
+                                                                    (
+                                                                        (
+                                                                            (
+                                                                                (
+                                                                                    (
+                                                                                        (
+                                                                                            f"<a href={poster}"
+                                                                                            + ">&#8203;</a>"
+                                                                                            "<b>Title : </b><code>"
+                                                                                        )
+                                                                                        + mov_title
+                                                                                    )
+                                                                                    + "</code>\n<code>"
+                                                                                )
+                                                                                + mov_details
+                                                                            )
+                                                                            + "</code>\n<b>Rating : </b><code>"
+                                                                        )
+                                                                        + mov_rating
+                                                                    )
+                                                                    + "</code>\n<b>Country : </b><code>"
+                                                                )
+                                                                + mov_country[0]
+                                                            )
+                                                            + "</code>\n<b>Language : </b><code>"
+                                                        )
+                                                        + mov_language[0]
+                                                    )
+                                                    + "</code>\n<b>Director : </b><code>"
+                                                )
+                                                + director
+                                            )
+                                            + "</code>\n<b>Writer : </b><code>"
+                                        )
+                                        + writer
+                                    )
+                                    + "</code>\n<b>Stars : </b><code>"
+                                )
+                                + stars
+                            )
+                            + "</code>\n<b>IMDB Url : </b>"
+                        )
+                        + mov_link
+                    )
+                    + "\n<b>Story Line : </b>"
+                )
+                + story_line
+            ),
             link_preview=True,
             parse_mode="HTML",
         )
+
     except IndexError:
-        await e.reply("Plox enter **Valid movie name** kthx")
-
-
-__help__ = """
- ❍ /imdb <Movie name>*:* Get full info about a movie from [imdb.com](https://m.imdb.com)
-"""
-
-__mod_name__ = "Iᴍᴅʙ✍️"
+        await e.reply("Please enter a valid movie name !")
