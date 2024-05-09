@@ -30,8 +30,6 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 6:
 
 app = Client(
     "Eval",
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN,
     in_memory=True,
 )
 
