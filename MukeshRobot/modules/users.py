@@ -45,7 +45,7 @@ def get_user_id(username):
     return None
 
 
-@Exoncmd(command=["broadcastall", "broadcastusers", "broadcastgroups"])
+@Mukeshcmd(command=["broadcastall", "broadcastusers", "broadcastgroups"])
 @dev_plus
 def broadcast(update: Update, context: CallbackContext):
     to_send = update.effective_message.text.split(None, 1)
@@ -93,7 +93,7 @@ def broadcast(update: Update, context: CallbackContext):
         )
 
 
-@Exonmsg((Filters.all & Filters.chat_type.groups), group=USERS_GROUP)
+@Mukeshmsg((Filters.all & Filters.chat_type.groups), group=USERS_GROUP)
 def log_user(update: Update, context: CallbackContext):
     chat = update.effective_chat
     msg = update.effective_message
