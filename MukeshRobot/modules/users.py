@@ -5,11 +5,11 @@ from telegram import ParseMode, TelegramError, Update
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import CallbackContext, Filters
 
-import MukesRobot.modules.no_sql.users_db as user_db
+import MukeshRobot.modules.no_sql.users_db as user_db
 from MukeshRobot import DEV_USERS, LOGGER, OWNER_ID, dispatcher
-from MukesRobot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
-from MukesRobot.modules.helper_funcs.decorators import Mukeshcmd, Mukeshmsg
-from MukesRobot.modules.no_sql.users_db import get_all_users
+from MukeshRobot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
+from MukeshRobot.modules.helper_funcs.decorators import Mukeshcmd, Mukeshmsg
+from MukeshRobot.modules.no_sql.users_db import get_all_users
 
 USERS_GROUP = 4
 CHAT_GROUP = 5
