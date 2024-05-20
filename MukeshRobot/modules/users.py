@@ -171,11 +171,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 # """
-from Exon.modules.language import gs
 
-
-def get_help(chat):
-    return gs(chat, "gcast_help")
 
 
 # """
