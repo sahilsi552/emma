@@ -112,7 +112,7 @@ def log_user(update: Update, context: CallbackContext):
         user_db.update_user(msg.forward_from.id, msg.forward_from.username)
 
 
-@Exoncmd(command="groups")
+@Mukeshcmd(command="groups")
 @sudo_plus
 def chats(update: Update, context: CallbackContext):
     all_chats = user_db.get_all_chats() or []
@@ -137,7 +137,7 @@ def chats(update: Update, context: CallbackContext):
         )
 
 
-@Exonmsg((Filters.all & Filters.chat_type.groups), group=CHAT_GROUP)
+@Mukeshmsg((Filters.all & Filters.chat_type.groups), group=CHAT_GROUP)
 def chat_checker(update: Update, context: CallbackContext):
     bot = context.bot
     try:
