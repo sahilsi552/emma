@@ -241,10 +241,10 @@ def info(update: Update, context: CallbackContext):
     if user.username:
         text += f"\n🔍 <b>ᴜsᴇʀɴᴀᴍᴇ:</b> @{html.escape(user.username)}"
 
-    text += f"\n➻ <b>ʟɪɴᴋ:</b> {mention_html(user.id, 'link')}"
+    text += f"\n🔗 <b>ʟɪɴᴋ:</b> {mention_html(user.id, 'link')}"
 
     if chat.type != "private" and user_id != bot.id:
-        _stext = "\n➻ <b>ᴩʀᴇsᴇɴᴄᴇ:</b> <code>{}</code>"
+        _stext = "\n🧑‍💻 <b>ᴩʀᴇsᴇɴᴄᴇ:</b> <code>{}</code>"
 
         status = status = bot.get_chat_member(chat.id, user.id).status
         if status:
@@ -318,10 +318,10 @@ def info(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                "ʜᴇᴀʟᴛʜ", url="https://t.me/tyro_update/15"
+                                "ʜᴇᴀʟᴛʜ🏥", url="https://t.me/tyro_update/15"
                             ),
                             InlineKeyboardButton(
-                                "Dɪsᴀsᴛᴇʀ", url="https://t.me/tyro_update/16"
+                                "Dɪsᴀsᴛᴇʀ🌪️", url="https://t.me/tyro_update/16"
                             ),
                         ],
                         [
@@ -343,10 +343,10 @@ def info(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                "ʜᴇᴀʟᴛʜ", url="https://t.me/mukeshbotzone/90"
+                                "ʜᴇᴀʟᴛʜ", url="https://t.me/tyro_update/15"
                             ),
                             InlineKeyboardButton(
-                                "ᴅɪsᴀsᴛᴇʀ", url="https://t.me/mukeshbotzone/26"
+                                "ᴅɪsᴀsᴛᴇʀ", url="https://t.me/tyro_update/16"
                             ),
                         ],
                         [
