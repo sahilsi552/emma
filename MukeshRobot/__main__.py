@@ -22,6 +22,7 @@ from telegram.ext import (
     Filters,
     MessageHandler,
 )
+from music_text import *
 from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 from telethon import __version__ as tlhver
@@ -781,7 +782,7 @@ def Music_about_callback(update: Update, context: CallbackContext):
                             text="Auth", callback_data="Music_auth"
                         ),
                         Inlinekeyboardbutton(
-                            text="c-play", callback_data="music_c-play" 
+                            text="c-play", callback_data="Music_c-play" )
                     ],
                     [
                         InlineKeyboardButton(
@@ -791,7 +792,7 @@ def Music_about_callback(update: Update, context: CallbackContext):
                             text="ping", callback_data="Music_ping"
                         ),
                         InlineKeyboardButton(
-                            text="play", callback_data="music_play"
+                            text="play", callback_data="Music_play")
                     ],
                     [
                         InlineKeyboardButton(
@@ -801,7 +802,7 @@ def Music_about_callback(update: Update, context: CallbackContext):
                             text="seek", callback_data="Music_seek"
                         ),
                         InlineKeyboardButton(
-                            text="song", callback_data="music_song"
+                            text="song", callback_data="Music_song")
                     ],
                     [
                         InlineKeyboardButton(
@@ -811,7 +812,7 @@ def Music_about_callback(update: Update, context: CallbackContext):
                             text="mode", callback_data="Music_mode"
                         ),
                         InlineKeyboardButton(
-                            text="other", callback_data="music_other"
+                            text="other", callback_data="Music_other")
                     ],
                     [
                         InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="mukesh_back")
@@ -928,8 +929,8 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         ) 
-    elif query.data == "ping":
-     query.message.edit_text(f»ping & stats ᴄᴏᴍᴍᴀɴᴅꜱ «*"
+    elif query.data == "Music_ping":
+     query.message.edit_text(
          f"""                    
   ᴘɪɴɢ & sᴛᴀᴛs :
 
@@ -955,6 +956,80 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         ) 
+     elif query.data == "Music_play":
+     query.message.edit_text(PLAYFORCE,
+        
+          reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="Music_"),
+                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="mukesh_support")
+                    ]
+                ]
+            ),
+        ) 
+     elif query.data == "Music_shuffle":
+     query.message.edit_text(QUEUE,
+        
+          reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="Music_"),
+                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="mukesh_support")
+                    ]
+                ]
+            ),
+        ) 
+     elif query.data == "Music_seek":
+     query.message.edit_text(SEEKBACK,
+        
+          reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="Music_"),
+                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="mukesh_support")
+                    ]
+                ]
+            ),
+        )
+     elif query.data == "Music_song":
+     query.message.edit_text(SONG,
+        
+          reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="Music_"),
+                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="mukesh_support")
+                    ]
+                ]
+            ),
+        )
+     elif query.data == "Music_mode":
+     query.message.edit_text("music mode text hereeeee",
+        
+          reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="Music_"),
+                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="mukesh_support")
+                    ]
+                ]
+            ),
+        )
+     elif query.data == "Music_other":
+     query.message.edit_text("music other text here",
+        
+          reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="Music_"),
+                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="mukesh_support")
+                    ]
+                ]
+            ),
+        )
+    
+     
 
 def get_help(update: Update, context: CallbackContext):
     chat = update.effective_chat  # type: Optional[Chat]
