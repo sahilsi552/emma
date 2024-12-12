@@ -93,7 +93,8 @@ buttons = [
     
         InlineKeyboardButton(
                             text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""
-    ],                  ),
+                        ),
+    ],
     [   
         InlineKeyboardButton(
                             text="ᴛᴜᴛᴏʀɪᴀʟ ⁉️",
