@@ -907,8 +907,8 @@ def Music_about_callback(update: Update, context: CallbackContext):
                 ]
             ),
         )
-       elif query.data == "Music_loop":
-           query.message.edit_text(f"*»loop ᴄᴏᴍᴍᴀɴᴅꜱ «*"
+    elif query.data == "Music_loop":
+        query.message.edit_text(f"*»loop ᴄᴏᴍᴍᴀɴᴅꜱ «*"
             f"""
 /play or /vplay or /cplay  - ʙᴏᴛ ᴡɪʟʟ ꜱᴛᴀʀᴛ ᴘʟᴀʏɪɴɢ ʏᴏᴜʀ ɢɪᴠᴇɴ ϙᴜᴇʀʏ on ᴠᴏɪᴄᴇ ᴄʜᴀᴛ ᴏʀ ꜱᴛʀᴇᴀᴍ ʟɪᴠᴇ ʟɪɴᴋꜱ ᴏɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛꜱ.
 ʟᴏᴏᴘ sᴛʀᴇᴀᴍ :
@@ -955,8 +955,8 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         ) 
-     elif query.data == "Music_play":
-         query.message.edit_text(PLAYFORCE,
+    elif query.data == "Music_play":
+        query.message.edit_text(PLAYFORCE,
         
           reply_markup=InlineKeyboardMarkup(
                 [
@@ -967,8 +967,8 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         ) 
-     elif query.data == "Music_shuffle":
-         query.message.edit_text(QUEUE,
+    elif query.data == "Music_shuffle":
+        query.message.edit_text(QUEUE,
         
           reply_markup=InlineKeyboardMarkup(
                 [
@@ -979,8 +979,8 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         ) 
-     elif query.data == "Music_seek":
-         query.message.edit_text(SEEKBACK,
+    elif query.data == "Music_seek":
+        query.message.edit_text(SEEKBACK,
         
           reply_markup=InlineKeyboardMarkup(
                 [
@@ -991,8 +991,8 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         )
-     elif query.data == "Music_song":
-         query.message.edit_text(SONG,
+    elif query.data == "Music_song":
+        query.message.edit_text(SONG,
         
           reply_markup=InlineKeyboardMarkup(
                 [
@@ -1003,8 +1003,8 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         )
-     elif query.data == "Music_mode":
-         query.message.edit_text("music mode text hereeeee",
+    elif query.data == "Music_mode":
+        query.message.edit_text("music mode text hereeeee",
         
           reply_markup=InlineKeyboardMarkup(
                 [
@@ -1015,8 +1015,8 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         )
-     elif query.data == "Music_other":
-         query.message.edit_text("music other text here",
+    elif query.data == "Music_other":
+        query.message.edit_text("music other text here",
         
           reply_markup=InlineKeyboardMarkup(
                 [
