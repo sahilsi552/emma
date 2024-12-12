@@ -56,7 +56,7 @@
 - Install pip by :
 `sudo pip3 install -U pip`
 - Clone the repository by :
-`git clone https://github.com/sahilsi552/emma && cd emma`
+`git clone https://github.com/sahilsi552/emmas && cd emmas`
 - Install/Upgrade setuptools by :
 `pip3 install --upgrade pip setuptools`
 - Install requirements by :
