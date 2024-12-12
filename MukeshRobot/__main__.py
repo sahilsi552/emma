@@ -81,34 +81,32 @@ I ᴄᴀɴ ʜᴇʟᴘ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘs ᴡɪᴛ
 
 buttons = [
     [
-        InlineKeyboardButton(
-            text="➕Aᴅᴅ Mᴇ ᴛᴏ Yᴏᴜʀ Gʀᴏᴜᴘ➕",
-            url=f"https://t.me/{dispatcher.bot.username}?startgroup=true",
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="ʜᴇʟᴘ🔧", callback_data="help_back"),
-        InlineKeyboardButton(
-                            text="ɪɴғᴏℹ️", callback_data="mukesh_"
-                        ),
+        InlineKeyboardButton(text="📚 ʜᴇʟᴘ ᴀɴᴅ ᴄᴏᴍᴍᴀɴᴅs 📚", callback_data="help_back"),
     ],
     [
         InlineKeyboardButton(
                             text="ᴅᴇᴠᴇʟᴏᴩᴇʀ🧑‍💻", url=f"tg://user?id={OWNER_ID}"
                         ),
+        InlineKeyboardButton(
+                            text="ɪɴғᴏℹ️", callback_data="mukesh_"
+                        ),
+    
+        InlineKeyboardButton(
+                            text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""
+    ],                  ),
+    [   
+        InlineKeyboardButton(
+                            text="ᴛᴜᴛᴏʀɪᴀʟ ⁉️",
+                            callback_data="bot_config_help",
+         ),
         InlineKeyboardButton(text="ᴍᴜsɪᴄ🎧",callback_data="Music_"),
     ],
     [
         InlineKeyboardButton(
-                            text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""
-                        ),
-        InlineKeyboardButton(
-                            text="Hᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ ⁉️",
-                            callback_data="bot_config_help",
-                        )
+            text="➕ Aᴅᴅ Mᴇ ᴛᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ➕",
+            url=f"https://t.me/{dispatcher.bot.username}?startgroup=true",
+        ),
     ],
-
-
 ]
 
 HELP_STRINGS = f"""
