@@ -6,7 +6,7 @@ class Config(object):
 
     API_ID = "20892750" # integer value, dont use ""
     API_HASH = "b0241677a3a2958667e93fa9a632c350"
-    TOKEN = "7694231563:AAEEu-m6eC1vtwTLOAXE6C_qMAs1o2cXZUE"  # This var used tbe API_KEY but it is now TOKEN, adjust accordingly.
+    TOKEN = "7369768633:AAFYrOjpywaHx0tDscchg0twytSXuv_eNa8"  # This var used tbe API_KEY but it is now TOKEN, adjust accordingly.
     OWNER_ID = "7785947978" # If you dont know, run the bot and do /id in your rivate chat with it, also an integer
     SUPPORT_CHAT = "tyrosupport"  # Your own group for support, do not add the @
     START_IMG = "https://telegra.ph/file/000625ad0b270aaea4ec6.jpg"
