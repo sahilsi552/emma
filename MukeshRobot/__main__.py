@@ -73,7 +73,7 @@ def get_readable_time(seconds: int) -> str:
 
 PM_START_TEXT = """ 
 
-Hɪ [🥀](https://telegra.ph/file/430b740f73dc4bda23459.jpg) Dᴇᴀʀ! {} Mʏ ɴᴀᴍᴇ ɪs {} 
+Hɪ [🥀](https://i.ibb.co/DLdX06d/file-4868.jpg) Dᴇᴀʀ! {} Mʏ ɴᴀᴍᴇ ɪs {} 
 
 I ᴄᴀɴ ʜᴇʟᴘ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘs ᴡɪᴛʜ ᴜsᴇғᴜʟ ғᴇᴀᴛᴜʀᴇs, ғᴇᴇʟ ғʀᴇᴇ ᴛᴏ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs!
 
@@ -406,16 +406,14 @@ def Mukesh_about_callback(update: Update, context: CallbackContext):
                             text="🏡 sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"
                         ),
                         InlineKeyboardButton(
-                            text="ᴜᴩᴅᴀᴛᴇs 🍷", url=f"https://t.me/tyro_update"
+                            text="ᴜᴩᴅᴀᴛᴇs 🍷", url=f"https://t.me/sonamsupport"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
                             text="🥀 ᴅᴇᴠᴇʟᴏᴩᴇʀ", url=f"tg://user?id={OWNER_ID}"
                         ),
-                        InlineKeyboardButton(
-                            text="ɢɪᴛʜᴜʙ 🍹", url="https://telegra.ph/file/282ce5ccfee6590e69b43.mp4"
-                        ),
+                        
                     ],
                     [
                         InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="mukesh_"),
@@ -564,7 +562,7 @@ Usɪɴɢ ᴛʜᴇ /settings ᴄᴏᴍᴍᴀɴᴅ ʏᴏᴜ ʜᴀᴠᴇ ᴀᴛ ʏ�
     elif query.data == "tutorial_v2_help":
         query.answer()
         query.message.reply_animation(
-            "https://te.legra.ph/file/b069a6a6f5ae539f60b30.mp4"
+            "https://graph.org/file/a71a4314a6a290d53c578.mp4"
         )
         query.message.edit_text(
             """Tᴏ ᴄᴏɴᴄʟᴜᴅᴇ, I ᴇxᴘʟᴀɪɴ ʏᴏᴜ ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜᴇ Bᴏᴛ's ʙᴀsɪᴄ ᴄᴏᴍᴍᴀɴᴅs, ғᴏʀ ᴛʜᴇ ʙᴀsɪʟᴀʀ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ᴏғ ᴛʜᴇ ɢʀᴏᴜᴘ's ᴜsᴇʀs.
@@ -718,7 +716,7 @@ Yᴏᴜ ᴄᴀɴ ʜᴇʟᴘ ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ᴡɪᴛʜ 
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="• Dᴏɴᴀᴛᴇ •", url="https://t.me/mukeshbotzone/7"),InlineKeyboardButton(text="• sᴜᴘᴘᴏʀᴛ •", callback_data="mukesh_support")
+                        InlineKeyboardButton(text="• Dᴏɴᴀᴛᴇ •", url="https://t.me/sonamsupport"),InlineKeyboardButton(text="• sᴜᴘᴘᴏʀᴛ •", callback_data="sonamsupport")
                     ]
                 ]
             ),
@@ -1005,6 +1003,15 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
         )
    elif query.data == "Music_speed":
         query.message.edit_text("music mode text hereeeee",
+ """*»sᴘᴇᴇᴅ ᴄᴏᴍᴍᴀɴᴅꜱ «*
+sᴘᴇᴇᴅ ᴄᴏᴍᴍᴀɴᴅs :
+
+ʏᴏᴜ ᴄᴀɴ ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ᴘʟᴀʏʙᴀᴄᴋ sᴘᴇᴇᴅ ᴏғ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ. [ᴀᴅᴍɪɴs ᴏɴʟʏ]
+
+/speed or /playback : ғᴏʀ ᴀᴅᴊᴜsᴛɪɴɢ ᴛʜᴇ ᴀᴜᴅɪᴏ ᴘʟᴀʏʙᴀᴄᴋ sᴘᴇᴇᴅ ɪɴ ɢʀᴏᴜᴘ.
+
+/cspeed or /cplayback : ғᴏʀ ᴀᴅᴊᴜsᴛɪɴɢ ᴛʜᴇ ᴀᴜᴅɪᴏ ᴘʟᴀʏʙᴀᴄᴋ sᴘᴇᴇᴅ ɪɴ ᴄʜᴀɴɴᴇʟ.
+""",
         
           reply_markup=InlineKeyboardMarkup(
                 [
@@ -1017,7 +1024,18 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
          )
     elif query.data == "Music_mode":
         query.message.edit_text("music mode text hereeeee",
-        
+ """*» ᴄʜᴀɴɢᴇ ꜱᴇᴛᴛɪɴɢꜱ ᴄᴏᴍᴍᴀɴᴅꜱ «*
+ᴄʜᴀɴɢᴇ ꜱᴇᴛᴛɪɴɢꜱ :
+
+/playmode : ꜰᴏʀ ᴄʜᴀɴɢᴇ ᴘʟᴀʏᴍᴏᴅᴇ ɪɴ ɢʀᴏᴜᴘꜱ ʙᴇᴛᴡᴇᴇɴ ᴍᴇᴍʙᴇʀꜱ ᴀɴᴅ ᴀᴅᴍɪɴꜱ
+
+/msettings : ꜰᴏʀ ᴄʜᴀɴɢᴇ ᴀᴜᴛʜ ᴜꜱᴇʀꜱ ᴀɴᴅ ʟᴀɴɢᴜᴀɢᴇ 
+
+/reload : ʀᴇʟᴏᴀᴅ ᴀᴅᴍɪɴ ᴄᴀᴄʜᴇꜱ
+/mreboot : ʀᴇꜱᴛᴀʀᴛ ʙᴏᴛ ꜰᴏʀ ʏᴏᴜʀ ɢʀᴏᴜᴘ
+/language : ᴄʜᴀɴɢᴇ ʟᴀɴɢᴜᴀɢᴇ ꜰᴏʀ ʏᴏᴜʀ ᴄʜᴀᴛ [Same : /lang /setlang ]
+/vclogger : ᴅɪꜱᴀʙʟᴇ/ᴇɴᴀʙʟᴇ ᴠɪᴅᴇᴏ ᴄʜᴀᴛ ʟᴏɢꜱ
+""",
           reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -1029,6 +1047,35 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
         )
     elif query.data == "Music_other":
         query.message.edit_text("music other text here",
+"""*» ᴄᴏᴍᴍᴀɴᴅꜱ «*
+ᴊᴜsᴛ ᴀᴅᴅ *ᴄ* ɪɴ ᴛʜᴇ sᴛᴀʀᴛɪɴɢ ᴏғ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴜsᴇ ᴛʜᴇᴍ ғᴏʀ ᴄʜᴀɴɴᴇʟ.
+
+[Only for SUDO] :
+/broadcast [MSG or reply to MSG] : Broadcast a MSG. 
+[>> details /broadcastinfo]
+/blacklistchat [ChatID] : Blacklist a chat.
+/whitelistchat [ChatID] : Whitelist a chat.
+/blacklistedchat : List of Blacklisted chats.
+/block [Username or Reply] : Block the user access.
+/unblock [Username or Reply] : Unblock the user access.
+/blockedusers : List of blocked users.
+/logs : Get logs of bot.
+/logger [on/off] : Logging activities in log group.
+/maintenance [on/off] : Maintenance mode of bot...
+/addfreechat : free from autoend/autoleave 
+/rmfreechat : remove a free chat
+/freechats : list of free chats 
+/setassist chat_id assist_id : renew assistant
+/sysinfo : system realtime info
+/spt : speedtest
+/getinfo [ID] : info of a chat 
+/eval : evaluate a code
+/gban /ungban /forcegban & /gbanlist are generic
+/msbanall  ok: ban all
+/activevc: list of active vc
+/autorestart: automatic restart 4am(ist)
+more cmd get help with cmd /autoend, /autoleave, /directplay
+""",                                
         
           reply_markup=InlineKeyboardMarkup(
                 [
@@ -1253,9 +1300,9 @@ def donate(update: Update, context: CallbackContext):
             DONATE_STRING,  disable_web_page_preview=True
         )
 
-        if OWNER_ID != 5935608297:
+        if OWNER_ID != 7785947978:
             update.effective_message.reply_text(
-                f"» ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴩᴇʀ ᴏғ {dispatcher.bot.first_name} sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ ɪs [ɢɪᴛʜᴜʙ](https://github.com/noob-mukesh/MukeshRobot)"
+                f"» ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴩᴇʀ ᴏғ {dispatcher.bot.first_name}"
                 f"\n\nʙᴜᴛ ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴅᴏɴᴀᴛᴇ ᴛᴏ ᴛʜᴇ ᴩᴇʀsᴏɴ ᴄᴜʀʀᴇɴᴛʟʏ ʀᴜɴɴɪɴɢ ᴍᴇ : [ʜᴇʀᴇ]({DONATE_STRING})",
 
 
@@ -1320,7 +1367,7 @@ def main():
                 caption=f"""
 ✨ㅤ{BOT_NAME} ɪs ᴀʟɪᴠᴇ ʙᴀʙʏ.
 ━━━━━━━━━━━━━
-**ᴍᴀᴅᴇ ᴡɪᴛʜ ❤️ ʙʏ sahil**
+**ᴍᴀᴅᴇ ᴡɪᴛʜ ❤️ ʙʏ noob**
 **ᴘʏᴛʜᴏɴ ᴠᴇʀsɪᴏɴ:** `{y()}`
 **ʟɪʙʀᴀʀʏ ᴠᴇʀsɪᴏɴ:** `{telever}`
 **ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ:** `{tlhver}`
