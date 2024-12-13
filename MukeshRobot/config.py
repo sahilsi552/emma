@@ -14,7 +14,7 @@ class Config(object):
     MONGO_DB_URI = "mongodb+srv://SATYAM847108:BIHARDARBHANGAA@cluster0.cfrj9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     # RECOMMENDED
     DATABASE_URL = "postgres://kykrjayd:s_zaM4ZfJFVIBZzsQxoHi1JKbV5edFgJ@kandula.db.elephantsql.com/kykrjayd"  # A sql database url from elephantsql.com
-    DATABASE_URL = "postgres://iadhvjopgtomul:4883b7456515dffbbea0b9e626bd06dbd33cdabfaaa6d1f5117d08c94ff777d6@ec2-18-206-103-49.compute-1.amazonaws.com:5432/dfh9hnujmva3kj"  # A sql database url from elephantsql.com
+    # A sql database url from elephantsql.com
     CASH_API_KEY = (
         ""  # Get your API key from https://www.alphavantage.co/support/#api-key
     )
