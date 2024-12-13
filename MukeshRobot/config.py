@@ -8,7 +8,7 @@ class Config(object):
     API_HASH = "b0241677a3a2958667e93fa9a632c350"
     TOKEN = "7884884953:AAHJP7F02Wkm1DLZgXH9ee7Wf7g9Ts_7sjA"  # This var used tbe API_KEY but it is now TOKEN, adjust accordingly.
     OWNER_ID = "7785947978" # If you dont know, run the bot and do /id in your rivate chat with it, also an integer
-    SUPPORT_CHAT = "tyrosupport"  # Your own group for support, do not add the @
+    SUPPORT_CHAT = "sonamsupport"  # Your own group for support, do not add the @
     START_IMG = "https://telegra.ph/file/000625ad0b270aaea4ec6.jpg"
     EVENT_LOGS = ()  # Prints information like gbans, sudo promotes, AI enabledisable states that may help in debugging and shit
     MONGO_DB_URI = "mongodb+srv://SATYAM847108:BIHARDARBHANGAA@cluster0.cfrj9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
