@@ -23,16 +23,17 @@ html2text==2024.2.26
 jikanpy==4.3.2
 lxml==4.9.4
 markdown2==2.4.13
-motor==3.3.2
+motor==3.6.0
 opencv-python-headless==4.9.0.80
 pillow==10.3.0
 pretty_errors==1.2.25
 psutil==5.9.8
 psycopg2-binary==2.9.9
+pymongo==4.9.2
 pydictionary==2.0.1
 pynewtonmath==1.0.1
 pyrate-limiter==2.10.0
-pyrogram==2.0.106
+https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.33.zip --force-reinstall
 python-telegram-bot==13.15
 regex==2024.5.10
 requests==2.31.0
