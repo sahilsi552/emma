@@ -1023,7 +1023,7 @@ sᴘᴇᴇᴅ ᴄᴏᴍᴍᴀɴᴅs :
             ),
          )
      elif query.data == "Music_mode":
-        query.message.edit_text("music mode text hereeeee"
+         query.message.edit_text("music mode text hereeeee"
  """*» ᴄʜᴀɴɢᴇ ꜱᴇᴛᴛɪɴɢꜱ ᴄᴏᴍᴍᴀɴᴅꜱ «*
 ᴄʜᴀɴɢᴇ ꜱᴇᴛᴛɪɴɢꜱ :
 
