@@ -1002,7 +1002,7 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
             ),
         )
    elif query.data == "Music_speed":
-        query.message.edit_text("music mode text hereeeee",
+        query.message.edit_text("music mode text hereeeee"
  """*»sᴘᴇᴇᴅ ᴄᴏᴍᴍᴀɴᴅꜱ «*
 sᴘᴇᴇᴅ ᴄᴏᴍᴍᴀɴᴅs :
 
@@ -1023,7 +1023,7 @@ sᴘᴇᴇᴅ ᴄᴏᴍᴍᴀɴᴅs :
             ),
          )
     elif query.data == "Music_mode":
-        query.message.edit_text("music mode text hereeeee",
+        query.message.edit_text("music mode text hereeeee"
  """*» ᴄʜᴀɴɢᴇ ꜱᴇᴛᴛɪɴɢꜱ ᴄᴏᴍᴍᴀɴᴅꜱ «*
 ᴄʜᴀɴɢᴇ ꜱᴇᴛᴛɪɴɢꜱ :
 
@@ -1046,7 +1046,7 @@ sᴘᴇᴇᴅ ᴄᴏᴍᴍᴀɴᴅs :
             ),
         )
     elif query.data == "Music_other":
-        query.message.edit_text("music other text here",
+        query.message.edit_text("music other text here"
 """*» ᴄᴏᴍᴍᴀɴᴅꜱ «*
 ᴊᴜsᴛ ᴀᴅᴅ *ᴄ* ɪɴ ᴛʜᴇ sᴛᴀʀᴛɪɴɢ ᴏғ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴜsᴇ ᴛʜᴇᴍ ғᴏʀ ᴄʜᴀɴɴᴇʟ.
 
