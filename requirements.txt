@@ -33,7 +33,7 @@ pymongo==4.9.2
 pydictionary==2.0.1
 pynewtonmath==1.0.1
 pyrate-limiter==2.10.0
-https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.33.zip --force-reinstall
+https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.33.zip 
 python-telegram-bot==13.15
 regex==2024.5.10
 requests==2.31.0
