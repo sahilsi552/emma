@@ -780,7 +780,7 @@ def Music_about_callback(update: Update, context: CallbackContext):
                         InlineKeyboardButton(
                             text="Auth", callback_data="Music_auth"
                         ),
-                        Inlinekeyboardbutton(
+                        InlinekeyboardButton(
                             text="c-play", callback_data="Music_c-play" )
                     ],
                     [
