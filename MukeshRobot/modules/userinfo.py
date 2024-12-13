@@ -343,14 +343,6 @@ def info(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                "ʜᴇᴀʟᴛʜ", url="https://t.me/tyro_update/15"
-                            ),
-                            InlineKeyboardButton(
-                                "ᴅɪsᴀsᴛᴇʀ", url="https://t.me/tyro_update/16"
-                            ),
-                        ],
-                        [
-                            InlineKeyboardButton(
                                 text="➕ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ➕",
                                 url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
                             ),
