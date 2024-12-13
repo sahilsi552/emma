@@ -1003,6 +1003,18 @@ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ɪ
                 ]
             ),
         )
+   elif query.data == "Music_speed":
+        query.message.edit_text("music mode text hereeeee",
+        
+          reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="Music_"),
+                        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="mukesh_support")
+                    ]
+                ]
+            ),
+         )
     elif query.data == "Music_mode":
         query.message.edit_text("music mode text hereeeee",
         
