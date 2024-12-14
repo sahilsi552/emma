@@ -87,9 +87,6 @@ buttons = [
         InlineKeyboardButton(
                             text="ᴅᴇᴠᴇʟᴏᴩᴇʀ🧑‍💻", url=f"tg://user?id={OWNER_ID}"
                         ),
-        InlineKeyboardButton(
-                            text="ɪɴғᴏℹ️", callback_data="mukesh_"
-                        ),
     
         InlineKeyboardButton(
                             text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""
@@ -414,7 +411,7 @@ def Mukesh_about_callback(update: Update, context: CallbackContext):
                         
                     ],
                     [
-                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="mukesh_"),
+                        InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="mukesh_back"),
                     ],
                 ]
             ),
