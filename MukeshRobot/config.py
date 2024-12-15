@@ -10,7 +10,7 @@ class Config(object):
     OWNER_ID = "7785947978" # If you dont know, run the bot and do /id in your rivate chat with it, also an integer
     SUPPORT_CHAT = "sonamsupport"  # Your own group for support, do not add the @
     START_IMG = "https://telegra.ph/file/000625ad0b270aaea4ec6.jpg"
-    EVENT_LOGS = ()  # Prints information like gbans, sudo promotes, AI enabledisable states that may help in debugging and shit
+    EVENT_LOGS = (-1002421019887)  # Prints information like gbans, sudo promotes, AI enabledisable states that may help in debugging and shit
     MONGO_DB_URI = "mongodb+srv://sahilji:sahilji@cluster0.lew4q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     # RECOMMENDED
     DATABASE_URL = "postgres://txwnszsd:Po-qBx-NkJvEg5Lo1kYzgihpL7W7o29d@kandula.db.elephantsql.com/txwnszsd"  # A sql database url from elephantsql.com
